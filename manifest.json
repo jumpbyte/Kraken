@@ -17,9 +17,15 @@
 		"scripts": ["background.js"]
 	},
 	"content_scripts": [
-	    {
-	      "matches": ["https://ceac.state.gov/genniv/default.aspx", "https://ceac.state.gov/GenNIV/Default.aspx", "https://ceac.state.gov/GenNIV/default.aspx"],
-	      "js": ["contents/jquery-3.1.1.min.js", "contents/home.js"]
-	    }
+		{
+			"matches": ["https://ceac.state.gov/genniv/default.aspx", "https://ceac.state.gov/GenNIV/Default.aspx", "https://ceac.state.gov/GenNIV/default.aspx"],
+			"js": ["contents/jquery-3.1.1.min.js", "contents/home.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/Common/ConfirmApplicationID.aspx?node=SecureQuestion"],
+			"js": ["contents/jquery-3.1.1.min.js", "contents/secure-question.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_personal.aspx?node=Personal1"],
+			"js": ["contents/jquery-3.1.1.min.js", "contents/complete-personal.js"]
+		}
 	]
 }

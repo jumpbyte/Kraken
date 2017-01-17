@@ -1,4 +1,5 @@
 chrome.runtime.onConnect.addListener(function(port) {
+    console.log(port);
     switch(port.name){
         case "content":
             content.onMessage.addListener(function(msg){
