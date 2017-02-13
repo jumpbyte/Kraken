@@ -58,7 +58,46 @@
 				"dist/lib/hashData.js",
 				"dist/lib/form.js",
 				"dist/lib/jquery.js",
-				"dist/contents/complete-personal.js"
+				"dist/contents/personal1.js"
+			]
+		},
+		{
+			"matches": [
+				"https://ceac.state.gov/GenNIV/General/complete/complete_personalcont.aspx?node=Personal2"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/hashData.js",
+				"dist/lib/form.js",
+				"dist/lib/jquery.js",
+				"dist/contents/personal2.js"
+			]
+		},
+		{
+			"matches": [
+				"https://ceac.state.gov/GenNIV/General/complete/complete_contact.aspx?node=AddressPhone"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/hashData.js",
+				"dist/lib/form.js",
+				"dist/lib/jquery.js",
+				"dist/contents/address-phone.js"
+			]
+		},
+		{
+			"matches": [
+				"https://ceac.state.gov/GenNIV/General/complete/Passport_Visa_Info.aspx?node=PptVisa"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/hashData.js",
+				"dist/lib/form.js",
+				"dist/lib/jquery.js",
+				"dist/contents/passport.js"
 			]
 		}
 	]

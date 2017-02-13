@@ -1,4 +1,4 @@
-define("contents/complete-personal", function(require, exports, module){
+define("contents/personal1", function(require, exports, module){
 require("lib/jquery");
 var form = require("lib/form");
 var hashData = require("lib/hashData");
@@ -27,28 +27,10 @@ require("lib/background").ready(function(info){
 	};
 	var data = hashData(info.data, hash);
 	form.set(data);
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_SURNAME").val("XIONG");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_GIVEN_NAME").val("XIONG");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_FULL_NAME_NATIVE").val("XIONG XIONG");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_FULL_NAME_NATIVE_NA").val("");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_rblOtherNames_1").prop("checked", true);
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_rblTelecodeQuestion_1").prop("checked", true);
-	// // $("#ctl00_SiteContentPlaceHolder_FormView1_rblTelecodeQuestion").val("Y");
-	// // $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_TelecodeSURNAME").val("8600");
-	// // $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_TelecodeGIVEN_NAME").val("6676");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_rblAPP_GENDER_0").prop("checked", true);
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_ddlAPP_MARITAL_STATUS").val("S");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_ddlDOBDay").val("09");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_ddlDOBMonth").val("OCT");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxDOBYear").val("1977");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_POB_CITY").val("BEIJING");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_POB_ST_PROVINCE").val("BEIJING");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_tbxAPP_POB_ST_PROVINCE_NA").val("");
-	// $("#ctl00_SiteContentPlaceHolder_FormView1_ddlAPP_POB_CNTRY").val("CHIN");
-	// $("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+	$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
 });
 });
 
 if(true){
-	require("contents/complete-personal");
+	require("contents/personal1");
 }
