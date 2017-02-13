@@ -2,30 +2,64 @@
 	"name": "Kraken",
 	"version": "0.1",
 	"manifest_version": 2,
-	"description": "",
-	"permissions": ["contextMenus"],
+	"description": "签证信息自动填写",
+	"permissions": [
+		"contextMenus"
+	],
 	"icons": {
 		"16": "images/icon-16.png",
 		"48": "images/icon-48.png"
 	},
-	//"browser_action": {
-	//	"default_icon": "images/icon-32.png",
-	//	"default_title": "Kraken",
-	//	"default_popup": "popup.html"
-	//},
+	"browser_action": {
+		"default_icon": "images/icon-32.png",
+		"default_title": "Kraken"
+	},
 	"background": {
-		"scripts": ["background.js"]
+		"scripts": [
+			"src/lib/loader.js",
+			"dist/background/data.js",
+			"dist/lib/storage.js",
+			"dist/background/switch.js",
+			"dist/background/background.js"
+		]
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://ceac.state.gov/genniv/default.aspx", "https://ceac.state.gov/GenNIV/Default.aspx", "https://ceac.state.gov/GenNIV/default.aspx"],
-			"js": ["contents/jquery-3.1.1.min.js", "contents/home.js"]
-		}, {
-			"matches": ["https://ceac.state.gov/GenNIV/Common/ConfirmApplicationID.aspx?node=SecureQuestion"],
-			"js": ["contents/jquery-3.1.1.min.js", "contents/secure-question.js"]
-		}, {
-			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_personal.aspx?node=Personal1"],
-			"js": ["contents/jquery-3.1.1.min.js", "contents/complete-personal.js"]
+			"matches": [
+				"https://ceac.state.gov/genniv/default.aspx",
+				"https://ceac.state.gov/GenNIV/Default.aspx",
+				"https://ceac.state.gov/GenNIV/default.aspx"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/jquery.js",
+				"dist/contents/home.js"
+			]
+		},
+		{
+			"matches": [
+				"https://ceac.state.gov/GenNIV/Common/ConfirmApplicationID.aspx?node=SecureQuestion"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/jquery.js",
+				"dist/contents/secure-question.js"
+			]
+		},
+		{
+			"matches": [
+				"https://ceac.state.gov/GenNIV/General/complete/complete_personal.aspx?node=Personal1"
+			],
+			"js": [
+				"src/lib/loader.js",
+				"dist/lib/background.js",
+				"dist/lib/hashData.js",
+				"dist/lib/form.js",
+				"dist/lib/jquery.js",
+				"dist/contents/complete-personal.js"
+			]
 		}
 	]
 }
