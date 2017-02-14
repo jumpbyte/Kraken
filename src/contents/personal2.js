@@ -1,6 +1,7 @@
 require("lib/jquery");
 var form = require("lib/form");
-var hashData = require("lib/hashData");
+var Type = require("lib/type");
+var Entity = require("lib/entity");
 require("lib/background").ready(function(info){
 	var hash = {
 		"Nationality": "ctl00$SiteContentPlaceHolder$FormView1$ddlAPP_NATL",
@@ -21,5 +22,5 @@ require("lib/background").ready(function(info){
 	};
 	var data = hashData(info.data, hash);
 	form.set(data);
-	$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+	// $("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
 });

@@ -5,24 +5,31 @@ var data = [{
     "Questions": 1,
     "Answer": "CHINA",
     // personal1
-    "SurName": "XING",
-    "GivenName": "ZHONG",
-    "FullNameNative": "XING ZHONG",
-    "FullNameNativeNA": true,
-    "OtherNames": "N",
-    "TelecodeQuestion": "Y",
-	"TelecodeSurName": "0001",
-	"TelecodeGivenName": "0101",
-	"Gender": "F",
-	"MaritalStatus": "O",
-	"OtherMaritalStatus": "LALALA",
-	"BirthYear": "1988",
-	"BirthMonth": "FEB",
-	"BirthDay": "03",
-	"City": "BEIJING",
-	"Province": "BEIJING",
-	"ProvinceNA": false,
-	"Country": "CHIN",
+    "personal1": {
+	    "SurName": "XING",
+	    "GivenName": "ZHONG",
+	    "FullNameNative": "XING ZHONG",
+	    "FullNameNativeNA": false,
+	    "HasOtherName": "Y",
+	    "OtherNames": [{
+		    "SurName": "a",
+		    "GivenName": "b"
+	    }, {
+		    "SurName": "c",
+		    "GivenName": "d"
+	    }],
+	    "TelecodeQuestion": "Y",
+		"TelecodeSurName": "0001",
+		"TelecodeGivenName": "0101",
+		"Gender": "F",
+		"MaritalStatus": "O",
+		"OtherMaritalStatus": "LALALA",
+		"Birth": "1988-06-06",
+		"City": "BEIJING",
+		"Province": "BEIJING",
+		"ProvinceNA": false,
+		"Country": "CHIN"
+    },
 	// personal2
 	"Nationality": "CHIN",
 	"OtherNationalityInd": "Y",
@@ -84,7 +91,38 @@ var data = [{
 	"LostPassportNumberUnknowInd": true,
 	"LostPassportCountry": "CHIN",
 	"LostPassportExplain": "LALALA",
-	//
+	// travel
+	"SpecificTravel": "Y",
+	"ArriveDate": "01-05-2017",
+	"ArriveFlight": "abc",
+	"ArriveCity": "ddd",
+	"DepartDate": "01-06-2017",
+	"DepartFlight": "abc",
+	"DepartCity": "ddd",
+	"SpectravelLocations": [{
+		"SpectravelLocation": "lala"
+	}],
+	"StayStreetAddress1": "aaa",
+	"StayStreetAddress2": "bbb",
+	"StayCity": "ccc",
+	"StayState": "ddd",
+	"StayZIPCode": "eee",
+	"WhoIsPaying": "O",
+	"PayerSurname": "name1",
+	"PayerGivenName": "name2",
+	"PayerPhone": "666",
+	"PayerEmail": "ddd@ddd.com",
+	"PayerEmailNA": false,
+	"PayerRelationship": "F",
+	"PayerAddrSameAsInd": "N",
+	"PayerStreetAddress1": "ad1",
+	"PayerStreetAddress2": "ad2",
+	"PayerCity": "sh",
+	"PayerStateProvince": "sh",
+	"PayerStateProvinceNA": false,
+	"PayerPostalZIPCode": "555",
+	"PayerPostalZIPCodeNA": false,
+	"PayerCountry": "CHIN"
 }];
 
 module.exports = {
