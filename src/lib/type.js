@@ -25,6 +25,11 @@ var Type = module.exports = {
 				typeof value.Month !== "undefined" &&
 				typeof value.Day !== "undefined";
 	},
+	DateS: function(value){
+		return typeof value.Year !== "undefined" &&
+				typeof value.Month !== "undefined" &&
+				typeof value.Day !== "undefined";
+	},
 	DateEn: function(value){
 		return typeof value.Year !== "undefined" &&
 				typeof value.Month !== "undefined" &&

@@ -2,8 +2,63 @@ require("lib/jquery");
 var form = require("lib/form");
 var Type = require("lib/type");
 var Entity = require("lib/entity");
+
+form.init([
+	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+	'tctl00$SiteContentPlaceHolder$FormView1$upnlMAILING_ADDR_SAME_AS_APP_ADDR',
+	'tctl00$SiteContentPlaceHolder$FormView1$upnlAPP_EMAIL_ADDR'
+]);
+
 require("lib/background").ready(function(info){
-	var hash = {
+	var AddressPhoneEntity = Entity({
+		"AddressLine1": {},
+		"AddressLine2": {},
+		"AddressCity": {},
+		"AddressState": {},
+		"AddressStateNA": {
+			"type": Type.Bool
+		},
+		"AddressPostalZone": {},
+		"AddressPostalZoneNA": {
+			"type": Type.Bool
+		},
+		"AddressCountry": {
+			"type": Type.Enum
+		},
+		"MailingAddressSame": {
+			"type": Type.YN,
+			"default": "Y",
+			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblMailingAddrSame$1",
+			"subs": {
+				"N": {
+					"MailingAddressLine1": {},
+					"MailingAddressLine2": {},
+					"MailingAddressCity": {},
+					"MailingAddressState": {},
+					"MailingAddressStateNA": {
+						"type": Type.Bool
+					},
+					"MailingAddressPostalZone": {},
+					"MailingAddressPostalZoneNA": {
+						"type": Type.Bool
+					},
+					"MailingAddressCountry": {
+						"type": Type.Enum
+					}
+				}
+			}
+		},
+		"PrimaryPhone": {},
+		"SecondaryPhone": {},
+		"SecondaryPhoneNA": {
+			"type": Type.Bool
+		},
+		"WorkPhone": {},
+		"WorkPhoneNA": {
+			"type": Type.Bool
+		},
+		"Email": {}
+	}, {
 		"AddressLine1": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_LN1",
 		"AddressLine2": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_LN2",
 		"AddressCity": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_CITY",
@@ -27,8 +82,10 @@ require("lib/background").ready(function(info){
 		"WorkPhone": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_BUS_TEL",
 		"WorkPhoneNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxAPP_BUS_TEL_NA",
 		"Email": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_EMAIL_ADDR"
-	};
-	var data = hashData(info.data, hash);
-	form.set(data);
-	// $("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+	});
+
+	var data = AddressPhoneEntity(info.data.AddressPhone);
+	form.set(data, function(){
+		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+	});
 });
