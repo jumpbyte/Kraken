@@ -22,8 +22,10 @@ var data = [{
 		"TelecodeSurName": "0001",
 		"TelecodeGivenName": "0101",
 		"Gender": "F",
-		"MaritalStatus": "O",
-		"OtherMaritalStatus": "LALALA",
+		"MaritalStatus": "D",
+		//"MaritalStatus": "M",
+		// "MaritalStatus": "O",
+		// "OtherMaritalStatus": "LALALA",
 		"Birth": "1988-06-06",
 		"City": "BEIJING",
 		"Province": "BEIJING",
@@ -217,7 +219,36 @@ var data = [{
 		"EmailNA": false
 	},
 	//
-	"Relatives": {}
+	"Relatives": {
+		"FathersSurname": "zhang",
+		"FathersSurnameUnknow": false,
+		"FathersGivenName": "san",
+		"FathersGivenNameUnknow": false,
+		"FathersBirth": "1970-07-07",
+		"FathersBirthUnknow": false,
+		"IsFatherLiveInUS": "Y",
+		"FathersStatus": "S",
+		"MothersSurname": "li",
+		"MothersSurnameUnknow": false,
+		"MothersGivenName": "si",
+		"MothersGivenNameUnknow": false,
+		"MothersBirth": "1972-02-02",
+		"MothersBirthUnknow": false,
+		"IsMotherLiveInUS": "Y",
+		"MothersStatus": "S",
+		"HasOtherRelatives": "Y",
+		"OtherRelatives": [{
+			"Surname": "xiao",
+			"GivenName": "hei",
+			"Relationship": "F",
+			"RelativesStatus": "C"
+		}, {
+			"Surname": "da",
+			"GivenName": "bai",
+			"Relationship": "F",
+			"RelativesStatus": "C"
+		}]
+	}
 }];
 
 module.exports = {

@@ -49,6 +49,15 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family1.aspx?node=Relatives"],
 			"js": ["relatives.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family2.aspx?node=Spouse"],
+			"js": ["spouse.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family4.aspx?node=PrevSpouse"],
+			"js": ["prev-spouse.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_workeducation1.aspx?node=WorkEducation1"],
+			"js": ["work-education.js"]
 		}
 	]
 }

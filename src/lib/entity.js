@@ -36,7 +36,7 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 				case Type.YN:
 					(function(){
 						var _value = value || item["default"];
-						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs[_value] && Object.keys(item.subs[_value]).length > 1);
+						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
 						data[key] = {
 							type: Type.Enum,
 							name: hash[parentsKey + key] || hash[key],
@@ -107,14 +107,18 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 					}
 					break;
 				case Type.String:
-					data[key] = {
-						type: Type.String,
-						name: hash[parentsKey + key] || hash[key],
-						value: (value || item["default"]) + ""
-					};
-					if(!data[key].name){
-						console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-					}
+					(function(){
+						data[key] = {
+							type: Type.String,
+							name: hash[parentsKey + key] || hash[key],
+							value: (value || item["default"]) + "",
+							"event-target": item["event-target"],
+							sub: item["event-target"] && item.sub ? Entity(item.sub, hash, parentsKey)(_data) : null
+						};
+						if(!data[key].name){
+							console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
+						}
+					})();
 					break;
 				case Type.Bool:
 					data[key] = {

@@ -107,7 +107,17 @@ var Form = module.exports = {
 					callback();
 				}else{
 					this._set(item.name, item.value, indexs);
-					callback();
+					if(item["event-target"]){
+						this.event(item["event-target"], function(){
+							if(item.sub){
+								this.set(item.sub, callback, indexs);
+							}else{
+								callback();
+							}
+						}.bind(this), indexs);
+					}else{
+						callback();
+					}
 				}
 			}.bind(this);
 		}.bind(this)), callback);
