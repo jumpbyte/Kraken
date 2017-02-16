@@ -41,7 +41,9 @@ require("lib/background").ready(function(info){
 		"HasLostPassport": {
 			"type": Type.YN,
 			"default": "N",
-			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblLOST_PPT_IND$0",
+			"event-target": {
+				"Y": "ctl00$SiteContentPlaceHolder$FormView1$rblLOST_PPT_IND$0"
+			},
 			"subs": {
 				"Y": {
 					"LostPassports": {

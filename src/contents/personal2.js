@@ -24,7 +24,9 @@ require("lib/background").ready(function(info){
 		"HasOtherNationality": {
 			"type": Type.YN,
 			"default": "N",
-			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblAPP_OTH_NATL_IND$0",
+			"event-target": {
+				"Y": "ctl00$SiteContentPlaceHolder$FormView1$rblAPP_OTH_NATL_IND$0"
+			},
 			"subs": {
 				"Y": {
 					// 其他国籍列表
@@ -40,7 +42,9 @@ require("lib/background").ready(function(info){
 							"HasPassport": {
 								"type": Type.YN,
 								"default": "N",
-								"event-target": "ctl00$SiteContentPlaceHolder$FormView1$dtlOTHER_NATL$ctl0{0}$rblOTHER_PPT_IND$0",
+								"event-target": {
+									"Y": "ctl00$SiteContentPlaceHolder$FormView1$dtlOTHER_NATL$ctl0{0}$rblOTHER_PPT_IND$0"
+								},
 								"subs": {
 									"Y": {
 										// 护照号
@@ -57,7 +61,9 @@ require("lib/background").ready(function(info){
 		"HasPermResOtherCountry": {
 			"type": Type.YN,
 			"default": "N",
-			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblPermResOtherCntryInd$0",
+			"event-target": {
+				"Y": "ctl00$SiteContentPlaceHolder$FormView1$rblPermResOtherCntryInd$0"
+			},
 			"subs": {
 				"Y": {
 					// 国家列表

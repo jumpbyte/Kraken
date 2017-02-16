@@ -128,7 +128,7 @@ var data = [{
 		"StayStreetAddress2": "bbb",
 		"StayCity": "ccc",
 		"StayState": "CT",
-		"StayZIPCode": "999",
+		"StayZIPCode": "99999",
 		"WhoIsPaying": "O",
 		"PayerSurname": "namea",
 		"PayerGivenName": "nameb",
@@ -142,10 +142,82 @@ var data = [{
 		"PayerCity": "sh",
 		"PayerStateProvince": "sh",
 		"PayerStateProvinceNA": false,
-		"PayerPostalZIPCode": "555",
+		"PayerPostalZIPCode": "55567",
 		"PayerPostalZIPCodeNA": false,
 		"PayerCountry": "CHIN"
-	}
+	},
+	// travel-companions
+	"TravelCompanions": {
+		"HasOtherPersons": "Y",
+		"IsGroupTravel": "N",
+		"Persons": [{
+			"Surname": "zhang",
+			"GivenName": "san",
+			"Relationship": "B"
+		}, {
+			"Surname": "li",
+			"GivenName": "si",
+			"Relationship": "O"
+		}]
+	},
+	//
+	"PreviousUSTravel": {
+		"HasPrevUSTravel": "Y",
+		"Travels": [{
+			"ArrivedDate": "2010-01-01",
+			"StayLength": "10",
+			"StayLengthCD": "D"
+		}, {
+			"ArrivedDate": "2011-01-01",
+			"StayLength": "2",
+			"StayLengthCD": "M"
+		}],
+		"HasUSDriverLicense": "Y",
+		"DriverLicenses": [{
+			"LicenseNum": "123456",
+			"LicenseNumUnknow": false,
+			"LicenseState": "AL"
+		}, {
+			"LicenseNum": "765432",
+			"LicenseNumUnknow": false,
+			"LicenseState": "AK"
+		}],
+		"HasPrevVisa": "Y",
+		"PrevVisaIssuedDate": "2009-09-09",
+		"VisaNum": "00000000",
+		"VisaNumNA": false,
+		"IsPrevVisaSameType": "Y",
+		"IsPrevVisaSameCountry": "N",
+		"IsPrevVisaTenPrint": "Y",
+		"IsPrevVisaLost": "Y",
+		"PrevVisaLostYear": "2012",
+		"PrevVisaLostExplain": "lost lost",
+		"IsPrevVisaCancelled": "Y",
+		"PrevVisaCancelExplain": "no no no",
+		"IsPrevVisaRefused": "Y",
+		"PrevVisaRefusedExplain": "la la la",
+		"IsIVPetition": "Y",
+		"IVPetitionExplain": "gogogo"
+	},
+	// us-contact
+	"USContact": {
+		"Surname": "wang",
+		"GivenName": "wu",
+		"NameNA": false,
+		"Organization": "hao lai wu",
+		"OrganizationNA": false,
+		"Relationship": "C",
+		"Address1": "addr1",
+		"Address2": "addr2",
+		"City": "jiu jin shan",
+		"State": "AL",
+		"ZipCode": "66666",
+		"PhoneNum": "7777777",
+		"Email": "abc@abc.com",
+		"EmailNA": false
+	},
+	//
+	"Relatives": {}
 }];
 
 module.exports = {

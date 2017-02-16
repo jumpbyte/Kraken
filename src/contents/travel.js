@@ -125,7 +125,9 @@ require("lib/background").ready(function(info){
 					"PayerAddrSameAsInd": {
 						"type": Type.YN,
 						"default": "Y",
-						"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblPayerAddrSameAsInd$1",
+						"event-target": {
+							"N": "ctl00$SiteContentPlaceHolder$FormView1$rblPayerAddrSameAsInd$1"
+						},
 						"subs": {
 							"N": {
 								// 付费人地址
@@ -240,6 +242,8 @@ require("lib/background").ready(function(info){
 
 	var data = TravelEntity(info.data.Travel);
 	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+		if(!$(".error-message").html().trim()){
+			$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+		}
 	});
 });

@@ -28,7 +28,9 @@ require("lib/background").ready(function(info){
 		"MailingAddressSame": {
 			"type": Type.YN,
 			"default": "Y",
-			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblMailingAddrSame$1",
+			"event-target": {
+				"N": "ctl00$SiteContentPlaceHolder$FormView1$rblMailingAddrSame$1"
+			},
 			"subs": {
 				"N": {
 					"MailingAddressLine1": {},

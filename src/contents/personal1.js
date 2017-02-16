@@ -47,7 +47,9 @@ require("lib/background").ready(function(info){
 		"HasTelecode": {
 			"type": Type.YN,
 			"default": "N",
-			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$rblTelecodeQuestion$0",
+			"event-target": {
+				"Y": "ctl00$SiteContentPlaceHolder$FormView1$rblTelecodeQuestion$0"
+			},
 			"subs": {
 				"Y": {
 					// 电报码姓氏

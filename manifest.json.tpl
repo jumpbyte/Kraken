@@ -37,6 +37,18 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_travel.aspx?node=Travel"],
 			"js": ["travel.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_travelcompanions.aspx?node=TravelCompanions"],
+			"js": ["travel-companions.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_previousustravel.aspx?node=PreviousUSTravel"],
+			"js": ["previous-us-travel.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_uscontact.aspx?node=USContact"],
+			"js": ["us-contact.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family1.aspx?node=Relatives"],
+			"js": ["relatives.js"]
 		}
 	]
 }

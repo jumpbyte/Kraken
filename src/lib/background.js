@@ -9,7 +9,6 @@ var background = {
 };
 
 port.onMessage.addListener(function(msg) {
-	// if(msg.isOpen && !$(".error-message").html().trim()){
 	if(msg.isOpen){
 		listeners.forEach(function(listener){
 			listener(msg.info);
