@@ -36,13 +36,13 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 				case Type.YN:
 					(function(){
 						var _value = value || item["default"];
-						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
+						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs["__OTHER__"] && !item.subs[_value] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
 						data[key] = {
 							type: Type.Enum,
 							name: hash[parentsKey + key] || hash[key],
 							value: _value,
 							"event-target": hasEvent ? item["event-target"] : "",
-							subs: item.subs && (item.subs[_value] || item.subs["__ALL__"]) ? Entity(item.subs[_value] || item.subs["__ALL__"], hash, parentsKey)(_data) : null
+							subs: item.subs && (item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"]) ? Entity(item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"], hash, parentsKey)(_data) : null
 						};
 						if(!data[key].name){
 							console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
@@ -111,7 +111,7 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 						data[key] = {
 							type: Type.String,
 							name: hash[parentsKey + key] || hash[key],
-							value: (value || item["default"]) + "",
+							value: (typeof value === "undefined" ? (item["default"] || "") : value) + "",
 							"event-target": item["event-target"],
 							sub: item["event-target"] && item.sub ? Entity(item.sub, hash, parentsKey)(_data) : null
 						};

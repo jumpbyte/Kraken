@@ -9,7 +9,7 @@ form.init([
 ]);
 
 require("lib/background").ready(function(info){
-	var SpouseEntity = Entity({
+	var PrevSpouseEntity = Entity({
 		"NumberOfPrevSpouses": {
 			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$tbxNumberOfPrevSpouses",
 			"sub": {
@@ -73,8 +73,8 @@ require("lib/background").ready(function(info){
 		"MarriageEndedCountry": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlMarriageEnded_CNTRY"
 	});
 
-	var data = SpouseEntity(info.data.Spouse);
+	var data = PrevSpouseEntity(info.data.PrevSpouse);
 	form.set(data, function(){
-		// $("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
 	});
 });

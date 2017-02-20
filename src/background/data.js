@@ -248,6 +248,53 @@ var data = [{
 			"Relationship": "F",
 			"RelativesStatus": "C"
 		}]
+	},
+	// PrevSpouse
+	"PrevSpouse": {
+		"NumberOfPrevSpouses": 2,
+		"PrevSpouses": [{
+			"SpouseSurname": "zhao",
+			"SpouseGivenName": "da",
+			"SpouseBirth": "1990-01-01",
+			"SpouseNationality": "CHIN",
+			"SpouseCity": "dalian",
+			"SpouseCityUnknow": false,
+			"SpouseCountry": "CHIN",
+			"MarriageDate": "2010-01-01",
+			"MarriageEndedDate": "2011-02-01",
+			"MarriageEndedExplain": "wu",
+			"MarriageEndedCountry": "CHIN"
+		},{
+			"SpouseSurname": "qian",
+			"SpouseGivenName": "er",
+			"SpouseBirth": "1992-02-02",
+			"SpouseNationality": "CHIN",
+			"SpouseCity": "sichuan",
+			"SpouseCityUnknow": false,
+			"SpouseCountry": "CHIN",
+			"MarriageDate": "2012-02-02",
+			"MarriageEndedDate": "2013-09-01",
+			"MarriageEndedExplain": "wu",
+			"MarriageEndedCountry": "CHIN"
+		}]
+	},
+	// WorkEducation
+	"WorkEducation": {
+		"PresentOccupation": "O",
+		"ExplainOtherPresentOccupation": "lalala",
+		"EmpSchName": "kong dao yi zhong",
+		"EmpSchAddr1": "kong dao huan dao nan lu",
+		"EmpSchAddr2": "kong dao huan dao dong lu",
+		"EmpSchCity": "kong cheng",
+		"EmpSchState": "kong zhou",
+		"EmpSchStateNA": false,
+		"EmpSchZipCode": "",
+		"EmpSchZipCodeNA": true,
+		"PhoneNum": "0002030",
+		"EmpSchCountry": "CHIN",
+		"CurrMonthlySalary": "100000",
+		"CurrMonthlySalaryNA": false,
+		"DescribeDuties": "no no no"
 	}
 }];
 

@@ -58,6 +58,9 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_workeducation1.aspx?node=WorkEducation1"],
 			"js": ["work-education.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_workeducation2.aspx?node=WorkEducation2"],
+			"js": ["work-education2.js"]
 		}
 	]
 }

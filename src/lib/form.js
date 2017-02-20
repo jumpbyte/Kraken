@@ -93,7 +93,7 @@ var Form = module.exports = {
 					}.bind(this))).complete(callback);
 				}else if(item.type === Type.Enum){
 					this._set(item.name, item.value, indexs);
-					this.event(typeof item["event-target"] === "string" ? item["event-target"] : item["event-target"][item.value], function(){
+					this.event(item["event-target"] ? typeof item["event-target"] === "string" ? item["event-target"] : item["event-target"][item.value] : null, function(){
 						if(item.subs){
 							this.set(item.subs, callback, indexs);
 						}else{
