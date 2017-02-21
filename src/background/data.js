@@ -295,6 +295,108 @@ var data = [{
 		"CurrMonthlySalary": "100000",
 		"CurrMonthlySalaryNA": false,
 		"DescribeDuties": "no no no"
+	},
+	"WorkEducation2": {
+		"PreviouslyEmployed": "Y",
+		"Employers": [{
+			"EmployerName": "gong zuo 1",
+			"EmployerStreetAddress1": "di zhi 1",
+			"EmployerStreetAddress2": "di zhi 2",
+			"EmployerCity": "cheng shi",
+			"EmployerState": "zhou",
+			"EmployerStateNA": false,
+			"EmployerZipCode": "77777",
+			"EmployerZipCodeNA": false,
+			"EmployerCountry": "CHIN",
+			"EmployerPhone": "1234567",
+			"JobTitle": "zong jian",
+			"SupervisorSurname": "zhang",
+			"SupervisorSurnameNA": false,
+			"SupervisorGivenName": "san",
+			"SupervisorGivenNameNA": false,
+			"EmployerDateFrom": "2009-07-01",
+			"EmployerDateTo": "2012-06-30",
+			"DescribeDuties": "go go go"
+		}, {
+			"EmployerName": "gong zuo 2",
+			"EmployerStreetAddress1": "di zhi 1 a",
+			"EmployerStreetAddress2": "di zhi 2 a",
+			"EmployerCity": "cheng shi 2",
+			"EmployerState": "zhou",
+			"EmployerStateNA": false,
+			"EmployerZipCode": "88888",
+			"EmployerZipCodeNA": false,
+			"EmployerCountry": "CHIN",
+			"EmployerPhone": "1234567",
+			"JobTitle": "zong jian",
+			"SupervisorSurname": "zhang",
+			"SupervisorSurnameNA": false,
+			"SupervisorGivenName": "san",
+			"SupervisorGivenNameNA": false,
+			"EmployerDateFrom": "2012-07-01",
+			"EmployerDateTo": "2016-06-30",
+			"DescribeDuties": "go go go"
+		}],
+		"OtherEduc": "Y",
+		"Schools": [{
+			"SchoolName": "xue xiao 1",
+			"SchoolAddr1": "addr1",
+			"SchoolAddr2": "addr2",
+			"SchoolCity": "city",
+			"SchoolState": "state",
+			"SchoolStateNA": false,
+			"SchoolZipCode": "66666",
+			"SchoolZipCodeNA": false,
+			"SchoolCountry": "CHIN",
+			"SchoolCourseOfStudy": "lalala",
+			"SchoolDateFrom": "2000-09-01",
+			"SchoolDateTo": "2003-07-01"
+		}, {
+			"SchoolName": "xue xiao 2",
+			"SchoolAddr1": "address1",
+			"SchoolAddr2": "address2",
+			"SchoolCity": "chengshi",
+			"SchoolState": "state",
+			"SchoolStateNA": false,
+			"SchoolZipCode": "66666",
+			"SchoolZipCodeNA": false,
+			"SchoolCountry": "CHIN",
+			"SchoolCourseOfStudy": "lalala",
+			"SchoolDateFrom": "2003-09-01",
+			"SchoolDateTo": "2006-07-01"
+		}]
+	},
+	"WorkEducation3": {
+		"IsBelongClan": "Y",
+		"ClanName": "clan name",
+		"LanguageNames": [{
+			"LanguageName": "china"
+		}, {
+			"LanguageName": "english"
+		}],
+		"IsCountrysVisited": "Y",
+		"CountrysVisited": [{
+			"Country": "ANTI"
+		}, {
+			"Country": "AZR"
+		}],
+		"IsBelongOrganization": "Y",
+		"OrganizationNames": [{
+			"Name": "zu zhi"
+		}],
+		"HasSpecializedSkills": "Y",
+		"SpecializedSkillExplain": "no zuo no die",
+		"IsMilitaryService": "Y",
+		"Militarys": [{
+			"Country": "CHIN",
+			"Branch": "branch",
+			"Rank": "rank",
+			"Specialty": "sp",
+			"FromDate": "2007-07-07",
+			"ToDate": "2008-08-08"
+		}],
+		"IsInsurgent": "Y",
+		"InsurgentExplain": "lalalala"
 	}
 }];
 

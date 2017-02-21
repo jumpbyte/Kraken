@@ -93,13 +93,34 @@ var Form = module.exports = {
 					}.bind(this))).complete(callback);
 				}else if(item.type === Type.Enum){
 					this._set(item.name, item.value, indexs);
-					this.event(item["event-target"] ? typeof item["event-target"] === "string" ? item["event-target"] : item["event-target"][item.value] : null, function(){
-						if(item.subs){
-							this.set(item.subs, callback, indexs);
+					(function(){
+						var setSubs = function(){
+							if(item.subs){
+								this.set(item.subs, callback, indexs);
+							}else{
+								callback();
+							}
+						}.bind(this);
+						var eventTarget = item["event-target"];
+						if(eventTarget){
+							if(typeof eventTarget === "string"){
+								this.event(eventTarget, setSubs, indexs);
+							}else if(typeof eventTarget === "function"){
+								eventTarget();
+								setSubs();
+							}else{
+								eventTarget = eventTarget[item.value];
+								if(typeof eventTarget === "string"){
+									this.event(eventTarget, setSubs, indexs);
+								}else if(typeof eventTarget === "function"){
+									eventTarget();
+									setSubs();
+								}
+							}
 						}else{
-							callback();
+							setSubs();
 						}
-					}.bind(this), indexs);
+					}.bind(this))();
 				}else if(item.type === Type.Date || item.type === Type.DateEn || item.type === Type.DateS){
 					this._set(item.name.Year, item.value.Year, indexs);
 					this._set(item.name.Month, item.value.Month, indexs);
