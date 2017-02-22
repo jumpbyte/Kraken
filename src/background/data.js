@@ -397,6 +397,74 @@ var data = [{
 		}],
 		"IsInsurgent": "Y",
 		"InsurgentExplain": "lalalala"
+	},
+	"SecurityandBackground1": {
+		"Disease": "Y",
+		"DiseaseExplain": "Disease",
+		"Disorder": "Y",
+		"DisorderExplain": "Disorder",
+		"Druguser": "Y",
+		"DruguserExplain": "Druguser"
+	},
+	"SecurityandBackground2": {
+		"Arrested": "Y",
+		"ArrestedExplain": "Arrested",
+		"ControlledSubstances": "Y",
+		"ControlledSubstancesExplain": "ControlledSubstances",
+		"Prostitution": "Y",
+		"ProstitutionExplain": "Prostitution",
+		"MoneyLaundering": "Y",
+		"MoneyLaunderingExplain": "MoneyLaundering",
+		"HumanTrafficking": "Y",
+		"HumanTraffickingExplain": "HumanTrafficking",
+		"AssistedSevereTrafficking": "Y",
+		"AssistedSevereTraffickingExplain": "AssistedSevereTrafficking",
+		"HumanTraffickingRelated": "Y",
+		"HumanTraffickingRelatedExplain": "HumanTraffickingRelated"
+	},
+	"SecurityandBackground3": {
+		"IllegalActivity": "Y",
+		"IllegalActivityExplain": "IllegalActivity",
+		"TerroristActivity": "Y",
+		"TerroristActivityExplain": "TerroristActivity",
+		"TerroristSupport": "Y",
+		"TerroristSupportExplain": "TerroristSupport",
+		"TerroristOrg": "Y",
+		"TerroristOrgExplain": "TerroristOrg",
+		"Genocide": "Y",
+		"GenocideExplain": "Genocide",
+		"Torture": "Y",
+		"TortureExplain": "Torture",
+		"ExViolence": "Y",
+		"ExViolenceExplain": "ExViolence",
+		"ChildSoldier": "Y",
+		"ChildSoldierExplain": "ChildSoldier",
+		"ReligiousFreedom": "Y",
+		"ReligiousFreedomExplain": "ReligiousFreedom",
+		"PopulationControls": "Y",
+		"PopulationControlsExplain": "PopulationControls",
+		"Transplant": "Y",
+		"TransplantExplain": "Transplant"
+	},
+	"SecurityandBackground4": {
+		"RemovalHearing": "Y",
+		"RemovalHearingExplain": "RemovalHearing",
+		"ImmigrationFraud": "Y",
+		"ImmigrationFraudExplain": "ImmigrationFraud",
+		"FailToAttend": "Y",
+		"FailToAttendExplain": "FailToAttend",
+		"VisaViolation": "Y",
+		"VisaViolationExplain": "VisaViolation"
+	},
+	"SecurityandBackground5": {
+		"ChildCustody": "Y",
+		"ChildCustodyExplain": "ChildCustody",
+		"VotingViolation": "Y",
+		"VotingViolationExplain": "VotingViolation",
+		"RenounceExp": "Y",
+		"RenounceExpExplain": "RenounceExp",
+		"AttWoReimb": "Y",
+		"AttWoReimbExplain": "AttWoReimb"
 	}
 }];
 

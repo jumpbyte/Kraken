@@ -67,6 +67,18 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground1.aspx?node=SecurityandBackground1"],
 			"js": ["securityand-background1.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground2.aspx?node=SecurityandBackground2"],
+			"js": ["securityand-background2.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground3.aspx?node=SecurityandBackground3"],
+			"js": ["securityand-background3.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground4.aspx?node=SecurityandBackground4"],
+			"js": ["securityand-background4.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground5.aspx?node=SecurityandBackground5"],
+			"js": ["securityand-background5.js"]
 		}
 	]
 }
