@@ -66,6 +66,16 @@ var Form = module.exports = {
 				// 单个值
 				$(form).val(value);
 				return;
+			}else if(form.length){
+				(function(items){
+					for(var i = 0, l = items.length; i < l; i ++){
+						if(items[i].value == value){
+							$(items[i]).prop("checked", true);
+							break;
+						}
+					}
+				})(form);
+				return;
 			}else{
 				$(form).remove();
 			}
