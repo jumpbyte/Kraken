@@ -1,18 +1,15 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPreviousUSTravel',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPREV_VISA',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPREV_VISA_REFUSED',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlIV_PETITION'
-]);
-
-require("lib/background").ready(function(info){
-	var PreviousUSTravelEntity = Entity({
+Page("PreviousUSTravel", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPreviousUSTravel',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPREV_VISA',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPREV_VISA_REFUSED',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlIV_PETITION'
+	],
+	entity: {
 		"HasPrevUSTravel": {
 			"type": Type.YN,
 			"default": "N",
@@ -138,7 +135,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"HasPrevUSTravel": "ctl00$SiteContentPlaceHolder$FormView1$rblPREV_US_TRAVEL_IND",
 		"ArrivedDate": {
 			"Year": "ctl00$SiteContentPlaceHolder$FormView1$dtlPREV_US_VISIT$ctl0{0}$tbxPREV_US_VISIT_DTEYear",
@@ -171,10 +169,5 @@ require("lib/background").ready(function(info){
 		"PrevVisaRefusedExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxPREV_VISA_REFUSED_EXPL",
 		"IsIVPetition": "ctl00$SiteContentPlaceHolder$FormView1$rblIV_PETITION_IND",
 		"IVPetitionExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxIV_PETITION_EXPL"
-	});
-
-	var data = PreviousUSTravelEntity(info.data.PreviousUSTravel);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

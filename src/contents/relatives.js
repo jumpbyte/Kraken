@@ -1,16 +1,13 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlUS_RELATIVES'
-]);
-
-require("lib/background").ready(function(info){
-	var RelativesEntity = Entity({
+Page("Relatives", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlUS_RELATIVES'
+	],
+	entity: {
 		"FathersSurname": {},
 		"FathersSurnameUnknow": {
 			"type": Type.Bool
@@ -92,7 +89,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"FathersSurname": "ctl00$SiteContentPlaceHolder$FormView1$tbxFATHER_SURNAME",
 		"FathersSurnameUnknow": "ctl00$SiteContentPlaceHolder$FormView1$cbxFATHER_SURNAME_UNK_IND",
 		"FathersGivenName": "ctl00$SiteContentPlaceHolder$FormView1$tbxFATHER_GIVEN_NAME",
@@ -122,10 +120,5 @@ require("lib/background").ready(function(info){
 		"GivenName": "ctl00$SiteContentPlaceHolder$FormView1$dlUSRelatives$ctl0{0}$tbxUS_REL_GIVEN_NAME",
 		"Relationship": "ctl00$SiteContentPlaceHolder$FormView1$dlUSRelatives$ctl0{0}$ddlUS_REL_TYPE",
 		"RelativesStatus": "ctl00$SiteContentPlaceHolder$FormView1$dlUSRelatives$ctl0{0}$ddlUS_REL_STATUS"
-	});
-
-	var data = RelativesEntity(info.data.Relatives);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

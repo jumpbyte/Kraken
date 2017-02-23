@@ -1,21 +1,18 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlNatl',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlAPP_OTH_NATL_IND',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlOTHER_NATL',
-	'tctl00$SiteContentPlaceHolder$FormView1$Help',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPermResOtherCntryInd',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlOthPermResCntryHelp'
-]);
-
-require("lib/background").ready(function(info){
-	var PersonalEntity = Entity({
+Page("Personal2", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlNatl',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlAPP_OTH_NATL_IND',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlOTHER_NATL',
+		'tctl00$SiteContentPlaceHolder$FormView1$Help',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPermResOtherCntryInd',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlOthPermResCntryHelp'
+	],
+	entity: {
 		// 国籍
 		"Nationality": {
 			"type": Type.Enum
@@ -100,7 +97,8 @@ require("lib/background").ready(function(info){
 		"TaxIdNA": {
 			"type": Type.Bool
 		}
-	}, {
+	},
+	hash: {
 		"Nationality": "ctl00$SiteContentPlaceHolder$FormView1$ddlAPP_NATL",
 		"HasOtherNationality": "ctl00$SiteContentPlaceHolder$FormView1$rblAPP_OTH_NATL_IND",
 		"OtherNationalitys.Nationality": "ctl00$SiteContentPlaceHolder$FormView1$dtlOTHER_NATL$ctl0{0}$ddlOTHER_NATL",
@@ -116,10 +114,5 @@ require("lib/background").ready(function(info){
 		"SSNNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxAPP_SSN_NA",
 		"TaxId": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_TAX_ID",
 		"TaxIdNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxAPP_TAX_ID_NA"
-	});
-
-	var data = PersonalEntity(info.data.Personal2);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

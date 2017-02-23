@@ -1,14 +1,11 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
-]);
-
-require("lib/background").ready(function(info){
-	var SecurityandBackgroundEntity = Entity({
+Page("SecurityandBackground1", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
+	],
+	entity: {
 		"Disease": {
 			"type": Type.YN,
 			"default": "N",
@@ -51,17 +48,13 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"Disease": "ctl00$SiteContentPlaceHolder$FormView1$rblDisease",
 		"DiseaseExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxDisease",
 		"Disorder": "ctl00$SiteContentPlaceHolder$FormView1$rblDisorder",
 		"DisorderExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxDisorder",
 		"Druguser": "ctl00$SiteContentPlaceHolder$FormView1$rblDruguser",
 		"DruguserExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxDruguser"
-	});
-
-	var data = SecurityandBackgroundEntity(info.data.SecurityandBackground1);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

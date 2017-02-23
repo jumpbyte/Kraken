@@ -1,17 +1,14 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
-	'tctl00$SiteContentPlaceHolder$FormView1$ctl02',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1'
-]);
-
-require("lib/background").ready(function(info){
-	var PassportEntity = Entity({
+Page("Passport", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
+		'tctl00$SiteContentPlaceHolder$FormView1$ctl02',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1'
+	],
+	entity: {
 		"PassportType": {
 			"type": Type.Enum,
 			"default": "R"
@@ -63,7 +60,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"PassportType": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_TYPE",
 		"PassportNumber": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_NUM",
 		"PassportBookNumber": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_BOOK_NUM",
@@ -88,10 +86,5 @@ require("lib/background").ready(function(info){
 		"LostPassports.NumberUnknow": "ctl00$SiteContentPlaceHolder$FormView1$dtlLostPPT$ctl0{0}$cbxLOST_PPT_NUM_UNKN_IND",
 		"LostPassports.Country": "ctl00$SiteContentPlaceHolder$FormView1$dtlLostPPT$ctl0{0}$ddlLOST_PPT_NATL",
 		"LostPassports.Explain": "ctl00$SiteContentPlaceHolder$FormView1$dtlLostPPT$ctl0{0}$tbxLOST_PPT_EXPL"
-	});
-
-	var data = PassportEntity(info.data.Passport);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

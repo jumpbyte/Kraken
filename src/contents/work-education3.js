@@ -1,19 +1,16 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlClan',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlLANGUAGES_IND',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlCOUNTRIES_VISITED_IND',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlORGANIZATION',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlMILITARY_SERVICE'
-]);
-
-require("lib/background").ready(function(info){
-	var WorkEducationEntity = Entity({
+Page("WorkEducation3", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlClan',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlLANGUAGES_IND',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlCOUNTRIES_VISITED_IND',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlORGANIZATION',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlMILITARY_SERVICE'
+	],
+	entity: {
 		"IsBelongClan": {
 			"type": Type.YN,
 			"default": "N",
@@ -118,7 +115,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"IsBelongClan": "ctl00$SiteContentPlaceHolder$FormView1$rblCLAN_TRIBE_IND",
 		"ClanName": "ctl00$SiteContentPlaceHolder$FormView1$tbxCLAN_TRIBE_NAME",
 		"LanguageName": "ctl00$SiteContentPlaceHolder$FormView1$dtlLANGUAGES$ctl0{0}$tbxLANGUAGE_NAME",
@@ -145,10 +143,5 @@ require("lib/background").ready(function(info){
 		},
 		"IsInsurgent": "ctl00$SiteContentPlaceHolder$FormView1$rblINSURGENT_ORG_IND",
 		"InsurgentExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxINSURGENT_ORG_EXPL"
-	});
-
-	var data = WorkEducationEntity(info.data.WorkEducation3);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

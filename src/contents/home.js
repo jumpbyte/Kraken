@@ -1,7 +1,8 @@
-require("lib/jquery");
-require("lib/background").ready(function(info){
+var Page = require("lib/page");
+
+Page("Home", function(data){
 	// 默认城市北京
-	var defaultCity = info.data.Location;
+	var defaultCity = data.Location;
 	if($("#ctl00_SiteContentPlaceHolder_ucLocation_ddlLocation").val() !== defaultCity){
 		$("#ctl00_SiteContentPlaceHolder_ucLocation_ddlLocation").val(defaultCity);
 		$("#ctl00_ddlLanguage").val("zh-CN");

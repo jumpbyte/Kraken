@@ -1,14 +1,11 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
-]);
-
-require("lib/background").ready(function(info){
-	var SecurityandBackgroundEntity = Entity({
+Page("SecurityandBackground3", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
+	],
+	entity: {
 		"IllegalActivity": {
 			"type": Type.YN,
 			"default": "N",
@@ -163,7 +160,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"IllegalActivity": "ctl00$SiteContentPlaceHolder$FormView1$rblIllegalActivity",
 		"IllegalActivityExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxIllegalActivity",
 		"TerroristActivity": "ctl00$SiteContentPlaceHolder$FormView1$rblTerroristActivity",
@@ -186,10 +184,5 @@ require("lib/background").ready(function(info){
 		"PopulationControlsExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxPopulationControls",
 		"Transplant": "ctl00$SiteContentPlaceHolder$FormView1$rblTransplant",
 		"TransplantExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxTransplant"
-	});
-
-	var data = SecurityandBackgroundEntity(info.data.SecurityandBackground3);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

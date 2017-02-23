@@ -125,6 +125,8 @@ var Form = module.exports = {
 								}else if(typeof eventTarget === "function"){
 									eventTarget();
 									setSubs();
+								}else{
+									setSubs()
 								}
 							}
 						}else{

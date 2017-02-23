@@ -1,15 +1,12 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlSpouseAddress'
-]);
-
-require("lib/background").ready(function(info){
-	var SpouseEntity = Entity({
+Page("Spouse", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlSpouseAddress'
+	],
+	entity: {
 		"SpouseSurname": {},
 		"SpouseGivenName": {},
 		"SpouseBirth": {
@@ -49,7 +46,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"SpouseSurname": "ctl00$SiteContentPlaceHolder$FormView1$tbxSpouseSurname",
 		"SpouseGivenName": "ctl00$SiteContentPlaceHolder$FormView1$tbxSpouseGivenName",
 		"SpouseBirth": {
@@ -70,10 +68,5 @@ require("lib/background").ready(function(info){
 		"SpouseAddressZipCode": "ctl00$SiteContentPlaceHolder$FormView1$tbxSPOUSE_ADDR_POSTAL_CD",
 		"SpouseAddressZipCodeNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxSPOUSE_ADDR_POSTAL_CD_NA",
 		"SpouseAddressCountry": "ctl00$SiteContentPlaceHolder$FormView1$ddlSPOUSE_ADDR_CNTRY"
-	});
-
-	var data = SpouseEntity(info.data.Spouse);
-	form.set(data, function(){
-		// $("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

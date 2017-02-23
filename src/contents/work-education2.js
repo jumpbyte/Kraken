@@ -1,16 +1,13 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPrevEmpl',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlOtherEduc'
-]);
-
-require("lib/background").ready(function(info){
-	var WorkEducationEntity = Entity({
+Page("WorkEducation2", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPrevEmpl',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlOtherEduc'
+	],
+	entity: {
 		"PreviouslyEmployed": {
 			"type": Type.YN,
 			"default": "N",
@@ -95,7 +92,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"PreviouslyEmployed": "ctl00$SiteContentPlaceHolder$FormView1$rblPreviouslyEmployed",
 		"EmployerName": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbEmployerName",
 		"EmployerStreetAddress1": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbEmployerStreetAddress1",
@@ -144,10 +142,5 @@ require("lib/background").ready(function(info){
 			"Month": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEduc$ctl0{0}$ddlSchoolToMonth",
 			"Day": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEduc$ctl0{0}$ddlSchoolToDay"
 		}
-	});
-
-	var data = WorkEducationEntity(info.data.WorkEducation2);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

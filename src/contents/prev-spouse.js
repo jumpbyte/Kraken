@@ -1,15 +1,12 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1'
-]);
-
-require("lib/background").ready(function(info){
-	var PrevSpouseEntity = Entity({
+Page("PrevSpouse", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1'
+	],
+	entity: {
 		"NumberOfPrevSpouses": {
 			"event-target": "ctl00$SiteContentPlaceHolder$FormView1$tbxNumberOfPrevSpouses",
 			"sub": {
@@ -46,7 +43,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"NumberOfPrevSpouses": "ctl00$SiteContentPlaceHolder$FormView1$tbxNumberOfPrevSpouses",
 		"SpouseSurname": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxSURNAME",
 		"SpouseGivenName": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxGIVEN_NAME",
@@ -71,10 +69,5 @@ require("lib/background").ready(function(info){
 		},
 		"MarriageEndedExplain": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxHowMarriageEnded",
 		"MarriageEndedCountry": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlMarriageEnded_CNTRY"
-	});
-
-	var data = PrevSpouseEntity(info.data.PrevSpouse);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

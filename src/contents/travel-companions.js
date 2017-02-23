@@ -1,16 +1,13 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlOtherPersonsTravelingWithYou',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlGroupTravel'
-]);
-
-require("lib/background").ready(function(info){
-	var TravelCompanionsEntity = Entity({
+Page("TravelCompanions", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlOtherPersonsTravelingWithYou',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlGroupTravel'
+	],
+	entity: {
 		"HasOtherPersons": {
 			"type": Type.YN,
 			"default": "N",
@@ -48,17 +45,13 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"HasOtherPersons": "ctl00$SiteContentPlaceHolder$FormView1$rblOtherPersonsTravelingWithYou",
 		"IsGroupTravel": "ctl00$SiteContentPlaceHolder$FormView1$rblGroupTravel",
 		"GroupName": "ctl00$SiteContentPlaceHolder$FormView1$tbxGroupName",
 		"Persons.Surname": "ctl00$SiteContentPlaceHolder$FormView1$dlTravelCompanions$ctl0{0}$tbxSurname",
 		"Persons.GivenName": "ctl00$SiteContentPlaceHolder$FormView1$dlTravelCompanions$ctl0{0}$tbxGivenName",
 		"Persons.Relationship": "ctl00$SiteContentPlaceHolder$FormView1$dlTravelCompanions$ctl0{0}$ddlTCRelationship"
-	});
-
-	var data = TravelCompanionsEntity(info.data.TravelCompanions);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

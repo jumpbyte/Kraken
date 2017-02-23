@@ -1,17 +1,14 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel3'
-]);
-
-require("lib/background").ready(function(info){
-	var PersonalEntity = Entity({
+Page("Personal1", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel2',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel3'
+	],
+	entity: {
 		// 姓氏
 		"SurName": {},
 		// 名字
@@ -90,7 +87,8 @@ require("lib/background").ready(function(info){
 		"Country": {
 			"type": Type.Enum
 		}
-	}, {
+	},
+	hash: {
 		"SurName": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_SURNAME",
 		"GivenName": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_GIVEN_NAME",
 		"FullName": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_FULL_NAME_NATIVE",
@@ -113,10 +111,5 @@ require("lib/background").ready(function(info){
 		"Province": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_POB_ST_PROVINCE",
 		"ProvinceNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxAPP_POB_ST_PROVINCE_NA",
 		"Country": "ctl00$SiteContentPlaceHolder$FormView1$ddlAPP_POB_CNTRY"
-	});
-
-	var data = PersonalEntity(info.data.Personal1);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

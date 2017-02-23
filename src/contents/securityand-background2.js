@@ -1,14 +1,11 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
-]);
-
-require("lib/background").ready(function(info){
-	var SecurityandBackgroundEntity = Entity({
+Page("SecurityandBackground2", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm'
+	],
+	entity: {
 		"Arrested": {
 			"type": Type.YN,
 			"default": "N",
@@ -107,7 +104,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"Arrested": "ctl00$SiteContentPlaceHolder$FormView1$rblArrested",
 		"ArrestedExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxArrested",
 		"ControlledSubstances": "ctl00$SiteContentPlaceHolder$FormView1$rblControlledSubstances",
@@ -122,10 +120,5 @@ require("lib/background").ready(function(info){
 		"AssistedSevereTraffickingExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxAssistedSevereTrafficking",
 		"HumanTraffickingRelated": "ctl00$SiteContentPlaceHolder$FormView1$rblHumanTraffickingRelated",
 		"HumanTraffickingRelatedExplain": "ctl00$SiteContentPlaceHolder$FormView1$tbxHumanTraffickingRelated"
-	});
-
-	var data = SecurityandBackgroundEntity(info.data.SecurityandBackground2);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

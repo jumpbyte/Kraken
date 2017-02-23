@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>自动填写设置</title>
+	</head>
+	<body>
+		<label>
+			<input id="auto-next" type="checkbox" />
+			填写完自动提交进入下一页
+		</label>
+		<script type="text/javascript" src="src/lib/loader.js"></script>
+		<script type="text/javascript" src="dist/lib/jquery.js"></script>
+		<script type="text/javascript" src="dist/lib/storage.js"></script>
+		<script type="text/javascript">
+			require("lib/jquery");
+			var storage = require("lib/storage");
+			var AUTO_NEXT_STORAGE_KEY = "auto-next";
+			if(storage.get(AUTO_NEXT_STORAGE_KEY) !== false){
+				$("#auto-next").prop("checked", true);
+			}
+
+			$("#auto-next").on("change", function(){});
+		</script>
+	</body>
+</html>

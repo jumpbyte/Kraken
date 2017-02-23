@@ -1,16 +1,13 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlMAILING_ADDR_SAME_AS_APP_ADDR',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlAPP_EMAIL_ADDR'
-]);
-
-require("lib/background").ready(function(info){
-	var AddressPhoneEntity = Entity({
+Page("AddressPhone", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlMAILING_ADDR_SAME_AS_APP_ADDR',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlAPP_EMAIL_ADDR'
+	],
+	entity: {
 		"AddressLine1": {},
 		"AddressLine2": {},
 		"AddressCity": {},
@@ -60,7 +57,8 @@ require("lib/background").ready(function(info){
 			"type": Type.Bool
 		},
 		"Email": {}
-	}, {
+	},
+	hash: {
 		"AddressLine1": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_LN1",
 		"AddressLine2": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_LN2",
 		"AddressCity": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_ADDR_CITY",
@@ -84,10 +82,5 @@ require("lib/background").ready(function(info){
 		"WorkPhone": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_BUS_TEL",
 		"WorkPhoneNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxAPP_BUS_TEL_NA",
 		"Email": "ctl00$SiteContentPlaceHolder$FormView1$tbxAPP_EMAIL_ADDR"
-	});
-
-	var data = AddressPhoneEntity(info.data.AddressPhone);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

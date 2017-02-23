@@ -1,9 +1,13 @@
 var data = [{
     // home
-    "Location": "BEJ",
+    "Home": {
+	    "Location": "BEJ"
+	},
     // secure-question
-    "Questions": 1,
-    "Answer": "CHINA",
+	"SecureQuestion": {
+	    "Questions": 1,
+	    "Answer": "CHINA"
+	},
     // personal1
     "Personal1": {
 	    "SurName": "XING",
@@ -279,7 +283,7 @@ var data = [{
 		}]
 	},
 	// WorkEducation
-	"WorkEducation": {
+	"WorkEducation1": {
 		"PresentOccupation": "O",
 		"ExplainOtherPresentOccupation": "lalala",
 		"EmpSchName": "kong dao yi zhong",

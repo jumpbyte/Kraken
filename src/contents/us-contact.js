@@ -1,15 +1,12 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPOC'
-]);
-
-require("lib/background").ready(function(info){
-	var USContactEntity = Entity({
+Page("USContact", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPOC'
+	],
+	entity: {
 		"Surname": {},
 		"GivenName": {},
 		"NameNA": {
@@ -39,7 +36,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"Surname": "ctl00$SiteContentPlaceHolder$FormView1$tbxUS_POC_SURNAME",
 		"GivenName": "ctl00$SiteContentPlaceHolder$FormView1$tbxUS_POC_GIVEN_NAME",
 		"NameNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxUS_POC_NAME_NA",
@@ -54,10 +52,5 @@ require("lib/background").ready(function(info){
 		"PhoneNum": "ctl00$SiteContentPlaceHolder$FormView1$tbxUS_POC_HOME_TEL",
 		"Email": "ctl00$SiteContentPlaceHolder$FormView1$tbxUS_POC_EMAIL_ADDR",
 		"EmailNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxUS_POC_EMAIL_ADDR_NA"
-	});
-
-	var data = USContactEntity(info.data.USContact);
-	form.set(data, function(){
-		$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-	});
+	}
 });

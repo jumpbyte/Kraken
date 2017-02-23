@@ -1,19 +1,16 @@
-require("lib/jquery");
-var form = require("lib/form");
+var Page = require("lib/page");
 var Type = require("lib/type");
-var Entity = require("lib/entity");
 
-form.init([
-	'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPrincipalApplicant',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlSpecificTravel',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlNotKnow',
-	'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
-	'tctl00$SiteContentPlaceHolder$FormView1$upnlPayer'
-]);
-
-require("lib/background").ready(function(info){
-	var TravelEntity = Entity({
+Page("Travel", {
+	controls: [
+		'tctl00$ucNavigateOption$ucNavPanel$updConfirm',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPrincipalApplicant',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlSpecificTravel',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlNotKnow',
+		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1',
+		'tctl00$SiteContentPlaceHolder$FormView1$upnlPayer'
+	],
+	entity: {
 		// 赴美访问的目的
 		"PurposeOfTrips": {
 			"type": Type.Array,
@@ -189,7 +186,8 @@ require("lib/background").ready(function(info){
 				}
 			}
 		}
-	}, {
+	},
+	hash: {
 		"PurposeOfTrip": "ctl00$SiteContentPlaceHolder$FormView1$dlPrincipalAppTravel$ctl0{0}$ddlPurposeOfTrip",
 		"Specify": "ctl00$SiteContentPlaceHolder$FormView1$dlPrincipalAppTravel$ctl0{0}$ddlOtherPurpose",
 		"SpecificTravel": "ctl00$SiteContentPlaceHolder$FormView1$rblSpecificTravel",
@@ -238,12 +236,5 @@ require("lib/background").ready(function(info){
 		"PayerCountry": "ctl00$SiteContentPlaceHolder$FormView1$ddlPayerCountry",
 		"PayingCompany": "ctl00$SiteContentPlaceHolder$FormView1$tbxPayingCompany",
 		"PayingCompanyRelation": "ctl00$SiteContentPlaceHolder$FormView1$tbxCompanyRelation"
-	});
-
-	var data = TravelEntity(info.data.Travel);
-	form.set(data, function(){
-		if(!$(".error-message").html().trim()){
-			$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
-		}
-	});
+	}
 });
