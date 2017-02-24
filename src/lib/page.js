@@ -16,7 +16,11 @@ module.exports = function(pageName, options){
 				data = PageEntity(data);
 				form.set(data, function(){
 					if(!$(".error-message").html().trim()){
-						$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+						if(options.next){
+							options.next();
+						}else{
+							$("#ctl00_SiteContentPlaceHolder_UpdateButton3").click();
+						}
 					}
 				});
 			}

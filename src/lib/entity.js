@@ -1,4 +1,9 @@
 var Type = require("./type");
+
+function doubleNum(value){
+	return value.length === 1 ? "0" + value : value;
+}
+
 var Entity = module.exports = function(entity, hash, parentsKey){
 	parentsKey = parentsKey ? parentsKey.replace(/\.+$/, "") + "." : "";
 
@@ -9,7 +14,9 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 			var item = entity[key];
 			var value = _data[key];
 
-			switch(item.type || Type.String){
+			item.type = item.type || Type.String;
+
+			switch(item.type){
 				case Type.Array:
 					(function(){
 						var _value;
@@ -26,7 +33,6 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 						}
 
 						data[key] = {
-							type: Type.Array,
 							value: _value,
 							"event-target": item["event-target"]
 						};
@@ -38,42 +44,26 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 						var _value = value || item["default"];
 						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs["__OTHER__"] && !item.subs[_value] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
 						data[key] = {
-							type: Type.Enum,
-							name: hash[parentsKey + key] || hash[key],
 							value: _value,
 							"event-target": hasEvent ? item["event-target"] : "",
 							subs: item.subs && (item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"]) ? Entity(item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"], hash, parentsKey)(_data) : null
 						};
-						if(!data[key].name){
-							console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-						}
 					})();
 					break;
 				case Type.Date:
 					data[key] = {
-						type: Type.Date,
-						name: hash[parentsKey + key] || hash[key],
 						value: (function(date){
 							date = date.split("-");
 							return {
 								"Year": date[0],
-								"Month": (function(value){
-									return value.length === 1 ? "0" + value : value;
-								})(date[1]),
-								"Day": (function(value){
-									return value.length === 1 ? "0" + value : value;
-								})(date[2])
+								"Month": doubleNum(date[1]),
+								"Day": doubleNum(date[2])
 							};
 						})(value || item["default"])
 					};
-					if(!data[key].name){
-						console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-					}
 					break;
 				case Type.DateS:
 					data[key] = {
-						type: Type.DateS,
-						name: hash[parentsKey + key] || hash[key],
 						value: (function(date){
 							date = date.split("-");
 							return {
@@ -83,53 +73,39 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 							};
 						})(value || item["default"])
 					};
-					if(!data[key].name){
-						console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-					}
 					break;
 				case Type.DateEn:
 					data[key] = {
-						type: Type.DateEn,
-						name: hash[parentsKey + key] || hash[key],
 						value: (function(date){
 							date = date.split("-");
 							return {
 								"Year": date[0],
 								"Month": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"][+date[1] - 1],
-								"Day": (function(value){
-									return value.length === 1 ? "0" + value : value;
-								})(date[2])
+								"Day": doubleNum(date[2])
 							};
 						})(value || item["default"])
 					};
-					if(!data[key].name){
-						console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-					}
 					break;
 				case Type.String:
-					(function(){
-						data[key] = {
-							type: Type.String,
-							name: hash[parentsKey + key] || hash[key],
-							value: (typeof value === "undefined" ? (item["default"] || "") : value) + "",
-							"event-target": item["event-target"],
-							sub: item["event-target"] && item.sub ? Entity(item.sub, hash, parentsKey)(_data) : null
-						};
-						if(!data[key].name){
-							console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-						}
-					})();
+					data[key] = {
+						value: (typeof value === "undefined" ? (item["default"] || "") : value) + "",
+						"event-target": item["event-target"],
+						sub: item["event-target"] && item.sub ? Entity(item.sub, hash, parentsKey)(_data) : null
+					};
 					break;
 				case Type.Bool:
 					data[key] = {
-						type: Type.Bool,
-						name: hash[parentsKey + key] || hash[key],
 						value: typeof value === "boolean" ? value : item["default"]
 					};
-					if(!data[key].name){
-						console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
-					}
 					break;
+			}
+
+			data[key].type = item.type;
+
+			if(item.type !== Type.Array){
+				if(!(data[key].name = hash[parentsKey + key] || hash[key])){
+					console.error("字段'" + (parentsKey + key) + "'没有找到表单名");
+				}
 			}
 		});
 

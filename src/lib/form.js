@@ -101,7 +101,7 @@ var Form = module.exports = {
 							}
 						}.bind(this);
 					}.bind(this))).complete(callback);
-				}else if(item.type === Type.Enum){
+				}else if(item.type === Type.Enum || item.type === Type.YN){
 					this._set(item.name, item.value, indexs);
 					(function(){
 						var setSubs = function(){
