@@ -41,6 +41,10 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 				case Type.Enum:
 				case Type.YN:
 					(function(){
+						if(item.type === Type.YN){
+							value = value ? "Y" : "N";
+						}
+
 						var _value = value || item["default"];
 						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs["__OTHER__"] && !item.subs[_value] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
 						data[key] = {
