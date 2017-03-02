@@ -3,6 +3,7 @@
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "签证信息自动填写",
+	"update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
 	"permissions": ["contextMenus"],
 	"icons": {
 		"16": "images/icon-16.png",

@@ -1,6 +1,8 @@
 var fs = require("fs");
 var path = require("path");
 var exec = require("child_process").exec;
+var uglify = require("uglify-js");
+var glob = require("glob");
 var packTpl = fs.readFileSync(path.join(__dirname, "pack.tpl")).toString("utf8");
 
 function tpl(template, data){
@@ -28,7 +30,7 @@ function mkdirs(dirpath){
 var REQUIRE_RE = /"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^/\r\n])+\/(?=[^\/])|\/\/.*|\.\s*require|(?:^|[^$])\brequire\s*\(\s*(["'])(.+?)\1\s*\)/g; //"
 
 var srcPath = path.join(__dirname, "src");
-var distPath = path.join(__dirname, "dist");
+var distPath = path.join(__dirname, "Kraken");
 var backgroundPath = path.join(srcPath, "background");
 var contentPath = path.join(srcPath, "contents");
 
@@ -37,10 +39,8 @@ function relativePath(file){
 }
 
 function configPath(file){
-	return file.replace(__dirname, "").replace(/^\/+/, "");
+	return file.replace(distPath, "").replace(/^\/+/, "");
 }
-
-var loaderFile = configPath(path.join(srcPath, "lib", "loader.js"));
 
 function packFile(file, isEntry){
 	var distFile = file.replace(srcPath, distPath);
@@ -73,6 +73,10 @@ function packFile(file, isEntry){
 			run: isEntry ? "true" : "false"
 		});
 
+		code = uglify.minify(code, {
+			fromString: true
+		}).code;
+
 		mkdirs(path.dirname(distFile));
 		fs.writeFileSync(distFile, code);
 	}
@@ -88,10 +92,14 @@ function packFile(file, isEntry){
 	return deps;
 }
 
-exec("rm -fr " + path.join(__dirname, "dist"), function(err){
+exec("rm -fr " + distPath, function(err){
 	if(err){
 		throw err;
 	}
+
+	mkdirs(path.join(distPath, "lib"));
+	fs.writeFileSync(path.join(distPath, "lib", "loader.js"), fs.readFileSync(path.join(srcPath, "lib", "loader.js")));
+	var loaderFile = configPath(path.join(distPath, "lib", "loader.js"));
 
 	var files = [];
 	manifest.background.scripts.forEach(function(file){
@@ -119,5 +127,23 @@ exec("rm -fr " + path.join(__dirname, "dist"), function(err){
 		config.js = files.reverse();
 	});
 
-	fs.writeFileSync(path.join(__dirname, "manifest.json"), JSON.stringify(manifest, null, "	"));
+	glob("*.png", {
+		cwd: path.join(__dirname, "images")
+	}, function(err, files){
+		mkdirs(path.join(distPath, "images"));
+		files.forEach(function(file){
+			fs.writeFileSync(path.join(distPath, "images", file), fs.readFileSync(path.join(__dirname, "images", file)));
+		});
+	});
+
+	fs.writeFileSync(path.join(distPath, "options.html"), fs.readFileSync(path.join(__dirname, "options.html")));
+
+	// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
+	fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
+
+	// exec("chrome.exe --pack-extension=" + distPath + " --pack-extension-key=" + path.join(__dirname, "Kraken.pem"), function(err){
+	// 	if(err){
+	// 		throw err;
+	// 	}
+	// });
 });
