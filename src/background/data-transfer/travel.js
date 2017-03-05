@@ -18,14 +18,14 @@ module.exports = function(data){
 		});
 	}else{
 		Travel.IntendedDate = travelInfo.arrivalDate;
-		Travel.IntendedLengthOfStay = travelInfo.stayTime;
-		Travel.IntendedLengthOfStayCD = travelInfo.stayUnit;
+		Travel.TravelLengthOfStay = travelInfo.stayTime;
+		Travel.TravelLengthOfStayCD = travelInfo.stayUnit;
 	}
 
 	Travel.StayStreetAddress1 = travelInfo.stayInfo.street;
-	Travel.StayState = travelInfo.state;
-	Travel.StayCity = travelInfo.city;
-	Travel.StayZIPCode = travelInfo.zipCode;
+	Travel.StayState = travelInfo.stayInfo.state;
+	Travel.StayCity = travelInfo.stayInfo.city;
+	Travel.StayZIPCode = travelInfo.stayInfo.zipCode;
 
 	Travel.WhoIsPaying = travelInfo.payFeeType;
 	if(Travel.WhoIsPaying === "O"){

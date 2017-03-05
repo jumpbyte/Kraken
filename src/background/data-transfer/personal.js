@@ -57,14 +57,13 @@ module.exports = function(data){
 	}
 
 	Personal2.SSNNA = !personalInfo.isHaveSecurityNumber;
-	if(!Personal2.SSNNA){
+	if(!Personal2.SSNNA && personalInfo.securityNumber){
 		(function(securityNumber){
 			securityNumber = securityNumber.split("-");
-			return {
-				SSN1: securityNumber[0],
-				SSN2: securityNumber[1],
-				SSN3: securityNumber[2]
-			};
+
+			Personal2.SSN1 = securityNumber[0];
+			Personal2.SSN2 = securityNumber[1];
+			Personal2.SSN3 = securityNumber[2];
 		})(personalInfo.securityNumber);
 	}
 	

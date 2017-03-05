@@ -20,5 +20,7 @@ module.exports = function(data){
 		};
 	});
 
-	return PrevSpouse;
+	return {
+		PrevSpouse: PrevSpouse
+	};
 }

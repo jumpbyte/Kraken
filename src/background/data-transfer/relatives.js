@@ -17,6 +17,8 @@ module.exports = function(data){
 	}
 	Relatives.IsFatherLiveInUS = familyInfo.father.inUS;
 	//Relatives.FathersStatus = familyInfo.father.
+	Relatives.FathersStatus = "O";
+
 	Relatives.MothersSurnameUnknow = !familyInfo.mother.surnName;
 	if(!Relatives.MothersSurnameUnknow){
 		Relatives.MothersSurname = familyInfo.mother.surnName;
@@ -31,6 +33,7 @@ module.exports = function(data){
 	}
 	Relatives.IsMotherLiveInUS = familyInfo.mother.inUS;
 	//Relatives.MothersStatus = familyInfo.mother.
+	Relatives.MothersStatus = "O";
 	
 	Relatives.HasImmediateRelatives = familyInfo.haveImmediateRelative;
 	if(Relatives.HasImmediateRelatives){
@@ -39,7 +42,7 @@ module.exports = function(data){
 				Surname: relative.surnName,
 				GivenName: relative.givenName,
 				Relationship: relative.relationWithYou,
-				RelativesStatus: ""
+				RelativesStatus: "O"
 			};
 		});
 	}else{

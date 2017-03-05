@@ -50,7 +50,7 @@ var Form = module.exports = {
 			return this;
 		}
 	},
-	_set: function(name, value, indexs){
+	_set: function(name, value, indexs, optional){
 		indexs = indexs || [];
 		name = name.replace(/\{(\d+)\}/g, function(all, key){
 			return indexs[key];
@@ -79,9 +79,11 @@ var Form = module.exports = {
 			}else{
 				$(form).remove();
 			}
+		}else if(optional){
+			return true;
 		}
 
-		$('<input name="' + name + '" value="' + value + '" />').appendTo(forms);
+		// $('<input name="' + name + '" value="' + value + '" />').appendTo(forms);
 	},
 	set: function(data, callback, indexs){
 		indexs = indexs || [];
@@ -102,7 +104,11 @@ var Form = module.exports = {
 						}.bind(this);
 					}.bind(this))).complete(callback);
 				}else if(item.type === Type.Enum || item.type === Type.YN){
-					this._set(item.name, item.value, indexs);
+					var noForm = this._set(item.name, item.value, indexs, item.optional);
+					if(noForm){
+						item.value = item.optional;
+						delete item["event-target"];
+					}
 					(function(){
 						var setSubs = function(){
 							if(item.subs){
@@ -139,7 +145,7 @@ var Form = module.exports = {
 					this._set(item.name.Day, item.value.Day, indexs);
 					callback();
 				}else{
-					this._set(item.name, item.value, indexs);
+					this._set(item.name, typeof item.value === "string" ? item.value.trim() : item.value, indexs);
 					if(item["event-target"]){
 						this.event(item["event-target"], function(){
 							if(item.sub){

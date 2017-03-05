@@ -1,7 +1,6 @@
-function transWorkEducation1(data){
+function transWorkEducation1(wetInfo){
 	var WorkEducation1 = {};
 
-	var wetInfo = data.wetInfo;
 	var presentWork = wetInfo.presentWork;
 	var schoolUnit = presentWork.schoolUnit;
 	var address = schoolUnit.address;
@@ -24,61 +23,64 @@ function transWorkEducation1(data){
 	return WorkEducation1;
 }
 
-function transWorkEducation2(data){
+function transWorkEducation2(wetInfo){
 	var WorkEducation2 = {};
 
-	var wetInfo = data.wetInfo;
 	var previousWork = wetInfo.previousWork;
 	WorkEducation2.PreviouslyEmployed = previousWork.employed;
-	WorkEducation2.Employers = previousWork.employmentList.map(function(employment){
-		var address = employment.address;
+	if(WorkEducation2.PreviouslyEmployed){
+		WorkEducation2.Employers = previousWork.employmentList.map(function(employment){
+			var address = employment.address;
 
-		return {
-			EmployerName: employment.companyName,
-			EmployerStreetAddress1: address.street,
-			EmployerCity: address.city,
-			EmployerState: address.province,
-			EmployerStateNA: !address.isHaveProvince,
-			EmployerZipCode: address.postCode,
-			EmployerZipCodeNA: !address.isHavePostCode,
-			EmployerCountry: address.country,
-			EmployerPhone: employment.telephone,
-			JobTitle: employment.jobTitle,
-			SupervisorSurname: employment.supervisor.surnName,
-			SupervisorSurnameNA: !employment.supervisor.surnName,
-			SupervisorGivenName: employment.supervisor.givenName,
-			SupervisorGivenNameNA: !employment.supervisor.givenName,
-			EmployerDateFrom: employment.from,
-			EmployerDateTo: employment.to,
-			DescribeDuties: employment.duteDescription
-		};
-	});
+			return {
+				EmployerName: employment.companyName,
+				EmployerStreetAddress1: address.street,
+				EmployerCity: address.city,
+				EmployerState: address.province,
+				EmployerStateNA: !address.isHaveProvince,
+				EmployerZipCode: address.postCode,
+				EmployerZipCodeNA: !address.isHavePostCode,
+				EmployerCountry: address.country,
+				EmployerPhone: employment.telephone,
+				JobTitle: employment.jobTitle,
+				SupervisorSurname: employment.supervisor.surnName,
+				SupervisorSurnameNA: !employment.supervisor.surnName,
+				SupervisorGivenName: employment.supervisor.givenName,
+				SupervisorGivenNameNA: !employment.supervisor.givenName,
+				EmployerDateFrom: employment.from,
+				EmployerDateTo: employment.to,
+				DescribeDuties: employment.duteDescription
+			};
+		});
+	}
+
 	WorkEducation2.OtherEduc = previousWork.attended;
-	WorkEducation2.Schools = previousWork.institutionList.map(function(institution){
-		var address = institution.address;
+	if(WorkEducation2.OtherEduc){
+		WorkEducation2.Schools = previousWork.institutionList.map(function(institution){
+			var address = institution.address;
 
-		return {
-			SchoolName: institution.name,
-			SchoolAddr1: address.street,
-			SchoolCity: address.city,
-			SchoolState: address.province,
-			SchoolStateNA: !address.isHaveProvince,
-			SchoolZipCode: address.postCode,
-			SchoolZipCodeNA: !address.isHavePostCode,
-			SchoolCountry: address.country,
-			SchoolCourseOfStudy: institution.course,
-			SchoolDateFrom: institution.from,
-			SchoolDateTo: institution.to
-		};
-	});
+			return {
+				SchoolName: institution.name,
+				SchoolAddr1: address.street,
+				SchoolCity: address.city,
+				SchoolState: address.province,
+				SchoolStateNA: !address.isHaveProvince,
+				SchoolZipCode: address.postCode,
+				SchoolZipCodeNA: !address.isHavePostCode,
+				SchoolCountry: address.country,
+				SchoolCourseOfStudy: institution.course,
+				SchoolDateFrom: institution.from,
+				SchoolDateTo: institution.to
+			};
+		});
+	}
 
 	return WorkEducation2;
 }
 
-function transWorkEducation3(data){
+function transWorkEducation3(wetInfo){
 	var WorkEducation3 = {};
 
-	var wetInfo = data.wetInfo;
 	var addition = wetInfo.addition;
 
 	WorkEducation3.IsBelongClan = addition.belongClanOrTribe;
@@ -88,31 +90,42 @@ function transWorkEducation3(data){
 			LanguageName: language
 		};
 	});
+
 	WorkEducation3.IsCountrysVisited = addition.traveledInFiveYear;
-	WorkEducation3.CountrysVisited = addition.visitedCountry.map(function(country){
-		return {
-			Country: country
-		};
-	});
+	if(WorkEducation3.IsCountrysVisited){
+		WorkEducation3.CountrysVisited = addition.visitedCountry.map(function(country){
+			return {
+				Country: country
+			};
+		});
+	}
+
 	WorkEducation3.IsBelongOrganization = addition.contributedForOrganization;
-	WorkEducation3.OrganizationNames = addition.organizationName.map(function(name){
-		return {
-			Name: name
-		};
-	});
+	if(WorkEducation3.IsBelongOrganization){
+		WorkEducation3.OrganizationNames = addition.organizationName.map(function(name){
+			return {
+				Name: name
+			};
+		});
+	}
+
 	WorkEducation3.HasSpecializedSkills = addition.specializedSkill;
 	WorkEducation3.SpecializedSkillExplain = addition.skillExplain;
+
 	WorkEducation3.IsMilitaryService = addition.served;
-	WorkEducation3.Militarys = addition.militarys.map(function(military){
-		return {
-			Country: military.country,
-			Branch: military.branch,
-			Rank: military.rank,
-			Specialty: military.specialty,
-			FromDate: military.from,
-			ToDate: military.to
-		};
-	});
+	if(WorkEducation3.IsMilitaryService){
+		WorkEducation3.Militarys = addition.militarys.map(function(military){
+			return {
+				Country: military.country,
+				Branch: military.branch,
+				Rank: military.rank,
+				Specialty: military.specialty,
+				FromDate: military.from,
+				ToDate: military.to
+			};
+		});
+	}
+	
 	WorkEducation3.IsInsurgent = addition.servedForRebelOrg;
 	WorkEducation3.InsurgentExplain = addition.rebelExplain;
 
@@ -120,9 +133,9 @@ function transWorkEducation3(data){
 }
 
 module.exports = function(data){
-	return {
-		WorkEducation1: transWorkEducation1(data),
-		WorkEducation2: transWorkEducation2(data),
-		WorkEducation3: transWorkEducation3(data)
-	};
+	return data.wetInfo ? {
+		WorkEducation1: transWorkEducation1(data.wetInfo),
+		WorkEducation2: transWorkEducation2(data.wetInfo),
+		WorkEducation3: transWorkEducation3(data.wetInfo)
+	} : {};
 }

@@ -37,6 +37,7 @@ Page("Travel", {
 		// 您是否制定了具体的行程计划？
 		"SpecificTravel": {
 			"type": Type.YN,
+			"optional": "N",
 			"default": "N",
 			"event-target": {
 				"Y": "ctl00$SiteContentPlaceHolder$FormView1$rblSpecificTravel$0",
@@ -82,15 +83,30 @@ Page("Travel", {
 				"N": {
 					// 预计抵达美国的日期
 					"IntendedDate": {
-						"type": Type.Date
+						"type": Type.DateS
 					},
 					// 预计停留时长
-					"IntendedLengthOfStay": {},
+					"TravelLengthOfStay": {},
 					// 预计停留时长单位
-					"IntendedLengthOfStayCD": {
+					"TravelLengthOfStayCD": {
 						// 年、月、周、日["Y", "M", "W", "D"]
 						"type": Type.Enum,
-						"default": "D"
+						"default": "D",
+						"event-target": "ctl00$SiteContentPlaceHolder$FormView1$ddlTRAVEL_LOS_CD",
+						"subs": {
+							"__ALL__": {
+								// 在美国的地址
+								"StayStreetAddress1": {},
+								// 在美国的地址
+								"StayStreetAddress2": {},
+								// 城市
+								"StayCity": {},
+								// 州
+								"StayState": {},
+								// 邮编
+								"StayZIPCode": {}
+							}
+						}
 					}
 				}
 			}

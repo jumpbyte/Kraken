@@ -48,6 +48,7 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 						var _value = value || item["default"];
 						var hasEvent = item.subs && (item.subs["__ALL__"] || item.subs["__OTHER__"] && !item.subs[_value] || item.subs[_value] && Object.keys(item.subs[_value]).length > 0);
 						data[key] = {
+							optional: item.optional,
 							value: _value,
 							"event-target": hasEvent ? item["event-target"] : "",
 							subs: item.subs && (item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"]) ? Entity(item.subs[_value] || item.subs["__ALL__"] || item.subs["__OTHER__"], hash, parentsKey)(_data) : null
