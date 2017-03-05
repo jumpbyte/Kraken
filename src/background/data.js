@@ -485,8 +485,7 @@ var data = [{
 	}
 }];
 
-// var dataTransfer = require("./data-transfer");
-var dataTransfer = function(){};
+var dataTransfer = require("./data-transfer");
 var options = require("./options");
 var config = require("config");
 

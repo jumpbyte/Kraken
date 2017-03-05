@@ -47,20 +47,22 @@ exec("rm -fr " + distPath, function(err){
 
 	var depTree = {};
 
-	function getDeps(file){
-		var deps = [];
+	function getDeps(file, deps){
+		deps = deps || [];
 
-		depTree[file].forEach(function(file){
-			if(deps.indexOf(file) === -1){
-				deps.push(file);
+		if(depTree[file]){
+			depTree[file].forEach(function(file){
+				if(deps.indexOf(file) === -1){
+					deps.push(file);
 
-				getDeps(file).forEach(function(file){
-					if(deps.indexOf(file) === -1){
-						deps.push(file);
-					}
-				});
-			}
-		});
+					getDeps(file, deps).forEach(function(file){
+						if(deps.indexOf(file) === -1){
+							deps.push(file);
+						}
+					});
+				}
+			});
+		}
 
 		return deps;
 	}
@@ -77,12 +79,6 @@ exec("rm -fr " + distPath, function(err){
 			var deps = [];
 
 			if(!/\/\/\s*@raw\s*\n/.test(content)){
-				content = tpl(packTpl, {
-					path: file.replace(/\.js$/, ""),
-					content: content,
-					run: /\/\/\s*@entry\s*\n/.test(content)
-				});
-
 				content = content.replace(REQUIRE_RE, function(all, quot, name){
 					if(!name){
 						return all;
@@ -98,6 +94,12 @@ exec("rm -fr " + distPath, function(err){
 
 					return all.replace(name, _name);
 				});
+
+				content = tpl(packTpl, {
+					path: file.replace(/\.js$/, ""),
+					content: content,
+					run: /\/\/\s*@entry\s*\n/.test(content)
+				});
 			}
 
 			depTree[file] = deps;
@@ -110,6 +112,59 @@ exec("rm -fr " + distPath, function(err){
 			mkdirs(path.dirname(distFile));
 			fs.writeFileSync(distFile, content);
 		});
+
+		var configDistFile = path.join(distPath, "config.js");
+		mkdirs(path.dirname(configDistFile));
+		// 编译配置
+		fs.writeFileSync(configDistFile, tpl(packTpl, {
+			path: "config",
+			content: "module.exports = " + fs.readFileSync(path.join(__dirname, "config.json")),
+			run: false
+		}));
+
+		var loaderFile = path.join("lib", "loader.js");
+
+		// 编译背景js
+		var files = [];
+		manifest.background.scripts.forEach(function(file){
+			file = path.join("background", file);
+
+			[file].concat(getDeps(file)).forEach(function(file){
+				if(files.indexOf(file) === -1){
+					files.push(file);
+				}
+			});
+		});
+		files.push(loaderFile);
+		manifest.background.scripts = files.reverse();
+
+		// 编译页面注入js
+		manifest["content_scripts"].forEach(function(config){
+			var files = [];
+			config.js.forEach(function(file){
+				file = path.join("contents", file);
+
+				[file].concat(getDeps(file)).forEach(function(file){
+					if(files.indexOf(file) === -1){
+						files.push(file);
+					}
+				});
+			});
+			files.push(loaderFile);
+			config.js = files.reverse();
+		});
+
+		// 编译manifest
+		fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
+		// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
+
+		var optionsHtml = fs.readFileSync(path.join(srcPath, "options.html")).toString("utf8");
+		optionsHtml = optionsHtml.replace(/<script\s+src="([^"]+)"><\/script>/g, function(all, file){
+			return [loaderFile].concat([file].concat(getDeps(file)).reverse()).map(function(file){
+				return '<script type="text/javascript" src="' + file + '"></script>';
+			}).join("\n");
+		});
+		fs.writeFileSync(path.join(distPath, "options.html"), optionsHtml);
 	});
 
 	glob("**/*.png", {
@@ -125,52 +180,4 @@ exec("rm -fr " + distPath, function(err){
 			fs.writeFileSync(distFile, fs.readFileSync(path.join(srcPath, file)));
 		});
 	});
-
-	// 编译配置
-	fs.writeFileSync(path.join(distPath, "config.js"), tpl(packTpl, {
-		path: "config",
-		content: "module.exports = " + fs.readFileSync(path.join(__dirname, "config.json")),
-		run: false
-	}));
-
-	var loaderFile = path.join("lib", "loader.js");
-
-	// 编译背景js
-	var files = [];
-	manifest.background.scripts.forEach(function(file){
-		[file].concat(getDeps(file)).forEach(function(file){
-			if(files.indexOf(file) === -1){
-				files.push(file);
-			}
-		});
-	});
-	files.push(loaderFile);
-	manifest.background.scripts = files.reverse();
-
-	// 编译页面注入js
-	manifest["content_scripts"].forEach(function(config){
-		var files = [];
-		config.js.forEach(function(file){
-			[file].concat(getDeps(file)).forEach(function(file){
-				if(files.indexOf(file) === -1){
-					files.push(file);
-				}
-			});
-		});
-		files.push(loaderFile);
-		config.js = files.reverse();
-	});
-
-	// 编译manifest
-	fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
-	// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
-
-
-	var optionsHtml = fs.readFileSync(path.join(srcPath, "options.html")).toString("utf8");
-	optionsHtml = optionsHtml.replace(/<script\s+src="([^"]+)"><\/script>/g, function(all, file){
-		return [file].concat(getDeps(file)).reverse().map(function(file){
-			return '<script type="text/javascript" src="' + file + '"></script>';
-		}).join("\n");
-	});
-	fs.writeFileSync(path.join(distPath, "options.html"), optionsHtml);
 });
