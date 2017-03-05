@@ -1,3 +1,4 @@
+// @entry
 var Page = require("lib/page");
 
 Page("SecureQuestion", function(data){

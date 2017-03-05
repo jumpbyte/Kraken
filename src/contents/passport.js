@@ -1,3 +1,4 @@
+// @entry
 var Page = require("lib/page");
 var Type = require("lib/type");
 
@@ -9,21 +10,21 @@ Page("Passport", {
 		'tctl00$SiteContentPlaceHolder$FormView1$UpdatePanel1'
 	],
 	entity: {
-		"PassportType": {
+		"Type": {
 			"type": Type.Enum,
 			"default": "R"
 		},
-		"PassportNumber": {},
-		"PassportBookNumber": {},
-		"PassportBookNumberNA": {
+		"Number": {},
+		"BookNumber": {},
+		"BookNumberNA": {
 			"type": Type.Bool
 		},
-		"IssuedCountry": {
+		"Country": {
 			"type": Type.Enum
 		},
-		"IssuedInCity": {},
-		"IssuedInState": {},
-		"IssuedInCountry": {
+		"IssuedCity": {},
+		"IssuedState": {},
+		"IssuedCountry": {
 			"type": Type.Enum
 		},
 		"IssuedDate": {
@@ -62,14 +63,14 @@ Page("Passport", {
 		}
 	},
 	hash: {
-		"PassportType": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_TYPE",
-		"PassportNumber": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_NUM",
-		"PassportBookNumber": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_BOOK_NUM",
-		"PassportBookNumberNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxPPT_BOOK_NUM_NA",
-		"IssuedCountry": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_ISSUED_CNTRY",
-		"IssuedInCity": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_ISSUED_IN_CITY",
-		"IssuedInState": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_ISSUED_IN_STATE",
-		"IssuedInCountry": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_ISSUED_IN_CNTRY",
+		"Type": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_TYPE",
+		"Number": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_NUM",
+		"BookNumber": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_BOOK_NUM",
+		"BookNumberNA": "ctl00$SiteContentPlaceHolder$FormView1$cbxPPT_BOOK_NUM_NA",
+		"Country": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_ISSUED_CNTRY",
+		"IssuedCity": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_ISSUED_IN_CITY",
+		"IssuedState": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_ISSUED_IN_STATE",
+		"IssuedCountry": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_ISSUED_IN_CNTRY",
 		"IssuedDate": {
 			"Year": "ctl00$SiteContentPlaceHolder$FormView1$tbxPPT_ISSUEDYear",
 			"Month": "ctl00$SiteContentPlaceHolder$FormView1$ddlPPT_ISSUED_DTEMonth",

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8" />
+		<title>设置</title>
+		<style type="text/css">
+			html,body{
+				width: 100%;
+				height: 100%;
+				padding: 0;
+				margin: 0;
+				background-color: #333;
+			}
+			body{
+				display: flex;
+				align-items: center;
+				justify-content: center;
+			}
+			.container{
+				padding: 0 30px 20px;
+				border-radius: 3px;
+				background-color: #f6f6f6;
+				border: 1px solid #fff;
+				box-shadow: 0 0px 30px #000;
+			}
+			.title{
+				font-size: 18px;
+				text-align: center;
+				line-height: 50px;
+				border-bottom: 1px solid #e6e6e6;
+				margin: 0 -30px 20px;
+				font-weight: normal;
+				color: #555;
+				background-color: #eee;
+			}
+			.line{
+				padding: 10px 0;
+				font-size: 14px;
+				color: #555;
+			}
+			.checkbox{
+				vertical-align: 1px;
+			}
+			.input{
+				display: block;
+				width: 500px;
+				height: 30px;
+				padding: 0 5px;
+				margin-top: 5px;
+				line-height: 30px;
+				border: 1px solid #ddd;
+				border-radius: 2px;
+				background-color: #f6f6f6;
+			}
+			.input:focus{
+				outline: none;
+				border-color: #999;
+				background-color: #fff;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="container">
+			<h1 class="title">自动填写设置</h1>
+			<p class="line">
+				<label>
+					<input id="auto-next" class="checkbox" type="checkbox" />
+					填写完自动提交进入下一页
+				</label>
+			</p>
+			<p class="line">
+				数据请求地址：
+				<input id="request-url" class="input" type="text" />
+			</p>
+			<p class="line">
+				完成提交地址：
+				<input id="submit-url" class="input" type="text" />
+			</p>
+		</div>
+		<script src="options.js"></script>
+	</body>
+</html>

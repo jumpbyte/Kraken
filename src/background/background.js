@@ -1,4 +1,6 @@
+// @entry
 var Switch = require("./switch");
+var Options = require("./options");
 var data = require("./data");
 
 // 连接content页面
@@ -10,6 +12,9 @@ chrome.runtime.onConnect.addListener(function(port) {
                     // 是否启用
                     isOpen: Switch.isOpen,
                     info: {
+                        options: {
+                            autoNext: Options.autoNext
+                        },
                         // 用户信息
                         data: data
                     }
@@ -19,7 +24,7 @@ chrome.runtime.onConnect.addListener(function(port) {
                 switch(msg.name){
                     case "complete":
                         // 完成一个人的填写后，删除
-                        data.remove();
+                        data.submit(msg.acceptNum);
                         break;
                 }
             });

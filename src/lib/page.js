@@ -15,7 +15,7 @@ module.exports = function(pageName, options){
 				var PageEntity = Entity(options.entity, options.hash);
 				data = PageEntity(data);
 				form.set(data, function(){
-					if(!$(".error-message").html().trim()){
+					if(info.options.autoNext && !$(".error-message").html().trim()){
 						if(options.next){
 							options.next();
 						}else{

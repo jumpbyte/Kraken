@@ -16,8 +16,6 @@ function readJson(file){
 	return JSON.parse(code);
 }
 
-var manifest = readJson(path.join(__dirname, "manifest.json.tpl"));
-
 function mkdirs(dirpath){
 	if(fs.existsSync(dirpath)){
 		return true;
@@ -31,8 +29,8 @@ var REQUIRE_RE = /"(?:\\"|[^"])*"|'(?:\\'|[^'])*'|\/\*[\S\s]*?\*\/|\/(?:\\\/|[^/
 
 var srcPath = path.join(__dirname, "src");
 var distPath = path.join(__dirname, "Kraken");
-var backgroundPath = path.join(srcPath, "background");
-var contentPath = path.join(srcPath, "contents");
+
+var manifest = readJson(path.join(srcPath, "manifest.json"));
 
 function relativePath(file){
 	return file.replace(srcPath, "").replace(/^\/+/, "").replace(/\.js$/, "");
@@ -42,69 +40,105 @@ function configPath(file){
 	return file.replace(distPath, "").replace(/^\/+/, "");
 }
 
-function packFile(file, isEntry){
-	var distFile = file.replace(srcPath, distPath);
-	var deps = [configPath(distFile)];
-
-	var code = fs.readFileSync(file).toString("utf8");
-	var _deps = [];
-	code = code.replace(REQUIRE_RE, function(all, quot, name){
-		var _file;
-
-		if(!name){
-			return all;
-		}
-
-		if(/^\.{1,2}\//.test(name)){
-			_file = path.join(path.dirname(file), name) + ".js";
-		}else{
-			_file = path.join(srcPath, name) + ".js";
-		}
-
-		_deps.push(_file);
-
-		return all.replace(name, relativePath(_file));
-	});
-
-	if(!fs.existsSync(distFile)){
-		code = tpl(packTpl, {
-			path: relativePath(file),
-			content: code,
-			run: isEntry ? "true" : "false"
-		});
-
-		code = uglify.minify(code, {
-			fromString: true
-		}).code;
-
-		mkdirs(path.dirname(distFile));
-		fs.writeFileSync(distFile, code);
-	}
-
-	_deps.forEach(function(file){
-		packFile(file).forEach(function(file){
-			if(deps.indexOf(file) === -1){
-				deps.push(file);
-			}
-		});
-	});
-
-	return deps;
-}
-
 exec("rm -fr " + distPath, function(err){
 	if(err){
 		throw err;
 	}
 
-	mkdirs(path.join(distPath, "lib"));
-	fs.writeFileSync(path.join(distPath, "lib", "loader.js"), fs.readFileSync(path.join(srcPath, "lib", "loader.js")));
-	var loaderFile = configPath(path.join(distPath, "lib", "loader.js"));
+	var depTree = {};
 
+	function getDeps(file){
+		var deps = [];
+
+		depTree[file].forEach(function(file){
+			if(deps.indexOf(file) === -1){
+				deps.push(file);
+
+				getDeps(file).forEach(function(file){
+					if(deps.indexOf(file) === -1){
+						deps.push(file);
+					}
+				});
+			}
+		});
+
+		return deps;
+	}
+
+	glob("**/*.js", {
+		cwd: srcPath
+	}, function(err, files){
+		if(err){
+			throw err;
+		}
+
+		files.forEach(function(file){
+			var content = fs.readFileSync(path.join(srcPath, file)).toString("utf8");
+			var deps = [];
+
+			if(!/\/\/\s*@raw\s*\n/.test(content)){
+				content = tpl(packTpl, {
+					path: file.replace(/\.js$/, ""),
+					content: content,
+					run: /\/\/\s*@entry\s*\n/.test(content)
+				});
+
+				content = content.replace(REQUIRE_RE, function(all, quot, name){
+					if(!name){
+						return all;
+					}
+
+					var _name = name;
+
+					if(/^\.{1,2}\//.test(name)){
+						_name = path.join(path.dirname(file), name);
+					}
+
+					deps.push(_name + ".js");
+
+					return all.replace(name, _name);
+				});
+			}
+
+			depTree[file] = deps;
+
+			// content = uglify.minify(content, {
+			// 	fromString: true
+			// }).code;
+
+			var distFile = path.join(distPath, file);
+			mkdirs(path.dirname(distFile));
+			fs.writeFileSync(distFile, content);
+		});
+	});
+
+	glob("**/*.png", {
+		cwd: srcPath
+	}, function(err, files){
+		if(err){
+			throw err;
+		}
+
+		files.forEach(function(file){
+			var distFile = path.join(distPath, file);
+			mkdirs(path.dirname(distFile));
+			fs.writeFileSync(distFile, fs.readFileSync(path.join(srcPath, file)));
+		});
+	});
+
+	// 编译配置
+	fs.writeFileSync(path.join(distPath, "config.js"), tpl(packTpl, {
+		path: "config",
+		content: "module.exports = " + fs.readFileSync(path.join(__dirname, "config.json")),
+		run: false
+	}));
+
+	var loaderFile = path.join("lib", "loader.js");
+
+	// 编译背景js
 	var files = [];
 	manifest.background.scripts.forEach(function(file){
-		file = path.join(backgroundPath, file);
-		packFile(file, true).forEach(function(file){
+		[file].concat(getDeps(file)).forEach(function(file){
 			if(files.indexOf(file) === -1){
 				files.push(file);
 			}
@@ -113,11 +147,11 @@ exec("rm -fr " + distPath, function(err){
 	files.push(loaderFile);
 	manifest.background.scripts = files.reverse();
 
+	// 编译页面注入js
 	manifest["content_scripts"].forEach(function(config){
 		var files = [];
 		config.js.forEach(function(file){
-			file = path.join(contentPath, file);
-			packFile(file, true).forEach(function(file){
+			[file].concat(getDeps(file)).forEach(function(file){
 				if(files.indexOf(file) === -1){
 					files.push(file);
 				}
@@ -127,23 +161,16 @@ exec("rm -fr " + distPath, function(err){
 		config.js = files.reverse();
 	});
 
-	glob("*.png", {
-		cwd: path.join(__dirname, "images")
-	}, function(err, files){
-		mkdirs(path.join(distPath, "images"));
-		files.forEach(function(file){
-			fs.writeFileSync(path.join(distPath, "images", file), fs.readFileSync(path.join(__dirname, "images", file)));
-		});
+	// 编译manifest
+	fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
+	// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
+
+
+	var optionsHtml = fs.readFileSync(path.join(srcPath, "options.html")).toString("utf8");
+	optionsHtml = optionsHtml.replace(/<script\s+src="([^"]+)"><\/script>/g, function(all, file){
+		return [file].concat(getDeps(file)).reverse().map(function(file){
+			return '<script type="text/javascript" src="' + file + '"></script>';
+		}).join("\n");
 	});
-
-	fs.writeFileSync(path.join(distPath, "options.html"), fs.readFileSync(path.join(__dirname, "options.html")));
-
-	// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
-	fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
-
-	// exec("chrome.exe --pack-extension=" + distPath + " --pack-extension-key=" + path.join(__dirname, "Kraken.pem"), function(err){
-	// 	if(err){
-	// 		throw err;
-	// 	}
-	// });
+	fs.writeFileSync(path.join(distPath, "options.html"), optionsHtml);
 });

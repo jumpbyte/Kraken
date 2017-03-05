@@ -1,3 +1,4 @@
+// @entry
 var Page = require("lib/page");
 
 Page("Home", function(data){
@@ -29,6 +30,13 @@ Page("Home", function(data){
 			padding: "0 10px",
 			lineHeight: "40px",
 			fontSize: "18px"
-		}).focus();
+		}).focus().keypress(function(e){
+			if(e.which === 13){
+				e.preventDefault();
+				$("#ctl00_ScriptManager1").val("ctl00$SiteContentPlaceHolder$UpdatePanel1|ctl00$SiteContentPlaceHolder$lnkNew");
+				$("#__EVENTTARGET").val("ctl00$SiteContentPlaceHolder$lnkNew");
+				$("#aspnetForm").submit();
+			}
+		});
 	}
 });

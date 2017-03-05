@@ -3,8 +3,10 @@
 	"version": "0.1",
 	"manifest_version": 2,
 	"description": "签证信息自动填写",
-	"update_url": "http://upext.chrome.360.cn/intf.php?method=ExtUpdate.query",
-	"permissions": ["contextMenus"],
+	"permissions": [
+		"http://*/",
+		"https://*/"
+	],
 	"icons": {
 		"16": "images/icon-16.png",
 		"48": "images/icon-48.png"
@@ -19,7 +21,12 @@
 	},
 	"content_scripts": [
 		{
-			"matches": ["https://ceac.state.gov/genniv/default.aspx", "https://ceac.state.gov/GenNIV/Default.aspx", "https://ceac.state.gov/GenNIV/default.aspx"],
+			"matches": [
+				"https://ceac.state.gov/genniv/",
+				"https://ceac.state.gov/genniv/default.aspx",
+				"https://ceac.state.gov/GenNIV/Default.aspx",
+				"https://ceac.state.gov/GenNIV/default.aspx"
+			],
 			"js": ["home.js"]
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/Common/ConfirmApplicationID.aspx?node=SecureQuestion"],
@@ -57,6 +64,9 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family4.aspx?node=PrevSpouse"],
 			"js": ["prev-spouse.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_family5.aspx?node=DeceasedSpouse"],
+			"js": ["deceased-spouse.js"]
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_workeducation1.aspx?node=WorkEducation1"],
 			"js": ["work-education1.js"]

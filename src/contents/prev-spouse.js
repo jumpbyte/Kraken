@@ -1,3 +1,4 @@
+// @entry
 var Page = require("lib/page");
 var Type = require("lib/type");
 
@@ -14,19 +15,19 @@ Page("PrevSpouse", {
 					"type": Type.Array,
 					"event-target": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl00$InsertButtonSpouse",
 					"item": {
-						"SpouseSurname": {},
-						"SpouseGivenName": {},
-						"SpouseBirth": {
+						"Surname": {},
+						"GivenName": {},
+						"Birth": {
 							"type": Type.DateEn
 						},
-						"SpouseNationality": {
+						"Nationality": {
 							"type": Type.Enum
 						},
-						"SpouseCity": {},
-						"SpouseCityUnknow": {
+						"City": {},
+						"CityUnknow": {
 							"type": Type.Bool
 						},
-						"SpouseCountry": {
+						"Country": {
 							"type": Type.Enum
 						},
 						"MarriageDate": {
@@ -46,17 +47,17 @@ Page("PrevSpouse", {
 	},
 	hash: {
 		"NumberOfPrevSpouses": "ctl00$SiteContentPlaceHolder$FormView1$tbxNumberOfPrevSpouses",
-		"SpouseSurname": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxSURNAME",
-		"SpouseGivenName": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxGIVEN_NAME",
-		"SpouseBirth": {
+		"Surname": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxSURNAME",
+		"GivenName": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxGIVEN_NAME",
+		"Birth": {
 			"Year": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxDOBYear",
 			"Month": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlDOBMonth",
 			"Day": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlDOBDay"
 		},
-		"SpouseNationality": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlSpouseNatDropDownList",
-		"SpouseCity": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxSpousePOBCity",
-		"SpouseCityUnknow": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$cbxSPOUSE_POB_CITY_NA",
-		"SpouseCountry": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlSpousePOBCountry",
+		"Nationality": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlSpouseNatDropDownList",
+		"City": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$tbxSpousePOBCity",
+		"CityUnknow": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$cbxSPOUSE_POB_CITY_NA",
+		"Country": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlSpousePOBCountry",
 		"MarriageDate": {
 			"Year": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$txtDomYear",
 			"Month": "ctl00$SiteContentPlaceHolder$FormView1$DListSpouse$ctl0{0}$ddlDomMonth",
