@@ -1,6 +1,6 @@
 {
 	"name": "Kraken",
-	"version": "0.2",
+	"version": "0.3",
 	"manifest_version": 2,
 	"description": "签证信息自动填写",
 	"permissions": [
