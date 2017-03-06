@@ -11,13 +11,13 @@ function transWorkEducation1(wetInfo){
 	WorkEducation1.EmpSchAddr1 = address.street;
 	WorkEducation1.EmpSchCity = address.city;
 	WorkEducation1.EmpSchState = address.province;
-	WorkEducation1.EmpSchStateNA = !address.isHaveProvince;
+	WorkEducation1.EmpSchStateNA = !address.province;
 	WorkEducation1.EmpSchZipCode = address.postCode;
-	WorkEducation1.EmpSchZipCodeNA = !address.isHavePostCode;
+	WorkEducation1.EmpSchZipCodeNA = !address.postCode;
 	WorkEducation1.PhoneNum = schoolUnit.phoneNumber;
 	WorkEducation1.EmpSchCountry = address.country;
 	WorkEducation1.CurrMonthlySalary = presentWork.income;
-	WorkEducation1.CurrMonthlySalaryNA = presentWork.notHaveIncome;
+	WorkEducation1.CurrMonthlySalaryNA = !presentWork.income;
 	WorkEducation1.DescribeDuties = presentWork.duteDescription;
 
 	return WorkEducation1;
@@ -37,9 +37,9 @@ function transWorkEducation2(wetInfo){
 				EmployerStreetAddress1: address.street,
 				EmployerCity: address.city,
 				EmployerState: address.province,
-				EmployerStateNA: !address.isHaveProvince,
+				EmployerStateNA: !address.province,
 				EmployerZipCode: address.postCode,
-				EmployerZipCodeNA: !address.isHavePostCode,
+				EmployerZipCodeNA: !address.postCode,
 				EmployerCountry: address.country,
 				EmployerPhone: employment.telephone,
 				JobTitle: employment.jobTitle,
@@ -64,9 +64,9 @@ function transWorkEducation2(wetInfo){
 				SchoolAddr1: address.street,
 				SchoolCity: address.city,
 				SchoolState: address.province,
-				SchoolStateNA: !address.isHaveProvince,
+				SchoolStateNA: !address.province,
 				SchoolZipCode: address.postCode,
-				SchoolZipCodeNA: !address.isHavePostCode,
+				SchoolZipCodeNA: !address.postCode,
 				SchoolCountry: address.country,
 				SchoolCourseOfStudy: institution.course,
 				SchoolDateFrom: institution.from,

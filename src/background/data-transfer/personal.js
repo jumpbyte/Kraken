@@ -51,13 +51,13 @@ module.exports = function(data){
 		});
 	}
 
-	Personal2.NationalIdNA = !personalInfo.isHaveIdCard;
+	Personal2.NationalIdNA = !personalInfo.idCard;
 	if(!Personal2.NationalIdNA){
 		Personal2.NationalId = personalInfo.idCard;
 	}
 
-	Personal2.SSNNA = !personalInfo.isHaveSecurityNumber;
-	if(!Personal2.SSNNA && personalInfo.securityNumber){
+	Personal2.SSNNA = !personalInfo.securityNumber;
+	if(!Personal2.SSNNA){
 		(function(securityNumber){
 			securityNumber = securityNumber.split("-");
 
@@ -67,7 +67,7 @@ module.exports = function(data){
 		})(personalInfo.securityNumber);
 	}
 	
-	Personal2.TaxIdNA = !personalInfo.isHaveTaxpayerNumber;
+	Personal2.TaxIdNA = !personalInfo.taxpayerNumber;
 	if(!Personal2.TaxIdNA){
 		Personal2.TaxId = personalInfo.taxpayerNumber;
 	}

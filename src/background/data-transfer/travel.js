@@ -39,12 +39,12 @@ module.exports = function(data){
 		if(!Travel.PayerAddrSameAsInd){
 			Travel.PayerStreetAddress1 = travelInfo.payPerson.address.street;
 			Travel.PayerCountry = travelInfo.payPerson.address.country;
-			Travel.PayerStateProvinceNA = !travelInfo.payPerson.address.isHaveProvince;
+			Travel.PayerStateProvinceNA = !travelInfo.payPerson.address.province;
 			if(!Travel.PayerStateProvinceNA){
 				Travel.PayerStateProvince = travelInfo.payPerson.address.province;
 			}
 			Travel.PayerCity = travelInfo.payPerson.address.city;
-			Travel.PayerPostalZIPCodeNA = !travelInfo.payPerson.address.isHavePostCode;
+			Travel.PayerPostalZIPCodeNA = !travelInfo.payPerson.address.postCode;
 			if(!Travel.PayerPostalZIPCodeNA){
 				Travel.PayerPostalZIPCode = travelInfo.payPerson.address.postCode;
 			}
@@ -56,9 +56,9 @@ module.exports = function(data){
 		Travel.PayerStreetAddress1 = travelInfo.payOrganization.address.street;
 		Travel.PayerCity = travelInfo.payOrganization.address.city;
 		Travel.PayerStateProvince = travelInfo.payOrganization.address.province;
-		Travel.PayerStateProvinceNA = !travelInfo.payOrganization.address.isHaveProvince;
+		Travel.PayerStateProvinceNA = !travelInfo.payOrganization.address.province;
 		Travel.PayerPostalZIPCode = travelInfo.payOrganization.address.postCode;
-		Travel.PayerPostalZIPCodeNA = !travelInfo.payOrganization.address.isHavePostCode;
+		Travel.PayerPostalZIPCodeNA = !travelInfo.payOrganization.address.postCode;
 		Travel.PayerCountry = travelInfo.payOrganization.address.country;
 	}
 

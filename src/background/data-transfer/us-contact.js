@@ -7,7 +7,7 @@ module.exports = function(data){
 	USContact.GivenName = contactInfo.givenName;
 	USContact.NameNA = contactInfo.notKnowPerson;
 	USContact.Organization = contactInfo.organizationName;
-	USContact.OrganizationNA = contactInfo.notKnowOrganization;
+	USContact.OrganizationNA = !contactInfo.organizationName;
 	USContact.Relationship = contactInfo.relationship;
 	USContact.Address1 = contactInfo.street;
 	USContact.City = contactInfo.city;
@@ -15,7 +15,7 @@ module.exports = function(data){
 	USContact.ZipCode = contactInfo.zipCode;
 	USContact.PhoneNum = contactInfo.phoneNumber;
 	USContact.Email = contactInfo.email;
-	USContact.EmailNA = contactInfo.notApplyEmail;
+	USContact.EmailNA = !contactInfo.email;
 
 
 	return {

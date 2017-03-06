@@ -17,12 +17,12 @@ module.exports = function(data){
 		if(Spouse.AddressType === "O"){
 			Spouse.AddressLine1 = spouseInfo.address.street;
 			Spouse.AddressCountry = spouseInfo.address.country;
-			Spouse.AddressStateNA = !spouseInfo.address.isHaveProvince;
+			Spouse.AddressStateNA = !spouseInfo.address.province;
 			if(!Spouse.AddressStateNA){
 				Spouse.AddressState = spouseInfo.address.province;
 			}
 			Spouse.AddressCity = spouseInfo.address.city;
-			Spouse.AddressZipCodeNA = !spouseInfo.address.isHavePostCode;
+			Spouse.AddressZipCodeNA = !spouseInfo.address.postCode;
 			if(!Spouse.AddressZipCodeNA){
 				Spouse.AddressZipCode = spouseInfo.address.postCode;
 			}

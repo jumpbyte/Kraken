@@ -29,7 +29,7 @@ module.exports = function(data){
 	if(PreviousUSTravel.HasPrevVisa){
 		PreviousUSTravel.PrevVisaIssuedDate = previousTravelInfo.previous.lastIssuedDate;
 		PreviousUSTravel.VisaNum = previousTravelInfo.previous.visaNumber;
-		PreviousUSTravel.VisaNumNA = previousTravelInfo.previous.notKnow;
+		PreviousUSTravel.VisaNumNA = !PreviousUSTravel.VisaNum;
 		PreviousUSTravel.IsPrevVisaSameType = previousTravelInfo.previous.applySameVisa;
 		PreviousUSTravel.IsPrevVisaSameCountry = previousTravelInfo.previous.sameIssuePlace;
 		PreviousUSTravel.IsPrevVisaTenPrint = previousTravelInfo.previous.haveFingerprint;
