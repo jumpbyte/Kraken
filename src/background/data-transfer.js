@@ -1,5 +1,15 @@
 module.exports = function(data){
-	var ViewModule = {};
+	var ViewModule = {
+		// home
+		"Home": {
+			"Location": "BEJ"
+		},
+		// secure-question
+		"SecureQuestion": {
+			"Questions": 1,
+			"Answer": "CHINA"
+		}
+	};
 
 	[
 		require("./data-transfer/personal"),

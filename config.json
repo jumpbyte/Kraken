@@ -1,4 +1,4 @@
 {
-	"request-url": "http://localhost:8080/data",
+	"request-url": "http://www.nodejser.com/kraken-data1.json",
 	"submit-url": "http://localhost:8080/submit"
 }

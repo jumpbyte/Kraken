@@ -1,12 +1,12 @@
 require("lib/jquery");
 var form = require("lib/form");
 var Entity = require("lib/entity");
-
+var params = require("lib/params");
 
 module.exports = function(pageName, options){
 	form.init(options.controls);
 
-	require("lib/background").ready(function(info){
+	function onReady(info){
 		var data = info.data[pageName];
 		if(typeof options === "function"){
 			options(data);
@@ -25,5 +25,11 @@ module.exports = function(pageName, options){
 				});
 			}
 		}
-	});
+	}
+
+	if(pageName === "Home"){
+		require("lib/background").init(params, onReady);
+	}else{
+		require("lib/background").ready(onReady);
+	}
 };

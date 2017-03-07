@@ -2,46 +2,39 @@ require("lib/jquery");
 var dataTransfer = require("./data-transfer");
 var options = require("./options");
 var config = require("config");
-var data = [];
+var data = null;
 
 module.exports = {
+	request: function(params, callback){
+		$.ajax({
+			url: options.requestUrl || config["request-url"],
+			dataType: "json",
+			data: params
+		}).done(function(result){
+			result.data = dataTransfer(result.data);
+			data = result;
+			callback(data.data);
+		});
+	},
 	get: function(callback){
-		if(data.length){
-			callback(data[0].data);
+		if(data){
+			callback(data.data);
 		}else{
-			$.ajax({
-				url: options.requestUrl || config["request-url"],
-				dataType: "json"
-			}).done(function(result){
-				result.data = dataTransfer(result.data);
-				Object.assign(result.data, {
-					// home
-					"Home": {
-						"Location": "BEJ"
-					},
-					// secure-question
-					"SecureQuestion": {
-						"Questions": 1,
-						"Answer": "CHINA"
-					}
-				});
-				data.push(result);
-				callback(data[0].data);
-			});
+			console.error("没有数据");
 		}
 	},
-	submit: function(acceptNum){
-		if(data.length){
-			var item = data.shift();
+	submit: function(acceptNum, callback){
+		if(data){
 			$.ajax({
 				url: options.submitUrl || config["submit-url"],
 				data: {
 					acceptNum: acceptNum,
-					formId: item.formId,
+					formId: data.formId,
 					status: 1
 				},
-				dataType: "json",
-				onSuccess: function(result){}
+				dataType: "json"
+			}).done(function(result){
+				callback();
 			});
 		}
 	}

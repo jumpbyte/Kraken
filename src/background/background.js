@@ -3,31 +3,42 @@ var Switch = require("./switch");
 var Options = require("./options");
 var data = require("./data");
 
+var formIdCache = {};
+
 // 连接content页面
-chrome.runtime.onConnect.addListener(function(port) {
-    switch(port.name){
-        case "background":
-            data.get(function(data){
-                port.postMessage({
-                    // 是否启用
-                    isOpen: Switch.isOpen,
-                    info: {
-                        options: {
-                            autoNext: Options.autoNext
-                        },
-                        // 用户信息
-                        data: data
-                    }
-                });
-            });
-            port.onMessage.addListener(function(msg){
-                switch(msg.name){
-                    case "complete":
-                        // 完成一个人的填写后，删除
-                        data.submit(msg.acceptNum);
-                        break;
+chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
+    function onData(data){
+        sendResponse({
+            options: {
+                autoNext: Options.autoNext
+            },
+            // 用户信息
+            data: data
+        });
+    }
+
+    if(Switch.isOpen){
+        switch(request.name){
+            case "request-data":
+                if(request.params.formId && request.params.formId !== formIdCache[sender.tab.id]){
+                    data.request(request.params, function(data){
+                        formIdCache[sender.tab.id] = request.params.formId;
+                        onData(data);
+                    });
+                }else{
+                    data.get(onData);
                 }
-            });
-            break;
+                break;
+            case "get-data":
+                data.get(onData);
+                break;
+            case "complete":
+                data.submit(request.acceptNum, function(){
+                    sendResponse({
+                        ok: true
+                    });
+                });
+                break;
+        }
     }
 });
