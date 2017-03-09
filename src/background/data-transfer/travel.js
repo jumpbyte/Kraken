@@ -1,3 +1,5 @@
+var splitAddress = require("lib/split-address");
+
 module.exports = function(data){
 	var Travel = {};
 
@@ -22,7 +24,8 @@ module.exports = function(data){
 		Travel.TravelLengthOfStayCD = travelInfo.stayUnit;
 	}
 
-	Travel.StayStreetAddress1 = travelInfo.stayInfo.street;
+	// Travel.StayStreetAddress1 = travelInfo.stayInfo.street;
+	splitAddress(travelInfo.stayInfo.street, Travel, ["StayStreetAddress1", "StayStreetAddress2"])
 	Travel.StayState = travelInfo.stayInfo.state;
 	Travel.StayCity = travelInfo.stayInfo.city;
 	Travel.StayZIPCode = travelInfo.stayInfo.zipCode;
@@ -37,7 +40,8 @@ module.exports = function(data){
 		Travel.PayerRelationship = travelInfo.payPerson.relationship;
 		Travel.PayerAddrSameAsInd = travelInfo.payPerson.sameAddrees;
 		if(!Travel.PayerAddrSameAsInd){
-			Travel.PayerStreetAddress1 = travelInfo.payPerson.address.street;
+			// Travel.PayerStreetAddress1 = travelInfo.payPerson.address.street;
+			splitAddress(travelInfo.payPerson.address.street, Travel, ["PayerStreetAddress1", "PayerStreetAddress2"]);
 			Travel.PayerCountry = travelInfo.payPerson.address.country;
 			Travel.PayerStateProvinceNA = !travelInfo.payPerson.address.province;
 			if(!Travel.PayerStateProvinceNA){
@@ -53,7 +57,8 @@ module.exports = function(data){
 		Travel.PayingCompany = travelInfo.payOrganization.name;
 		Travel.PayerPhone = travelInfo.payOrganization.telephone;
 		Travel.PayingCompanyRelation = travelInfo.payOrganization.relationship;
-		Travel.PayerStreetAddress1 = travelInfo.payOrganization.address.street;
+		// Travel.PayerStreetAddress1 = travelInfo.payOrganization.address.street;
+		splitAddress(travelInfo.payOrganization.address.street, Travel, ["PayerStreetAddress1", "PayerStreetAddress2"]);
 		Travel.PayerCity = travelInfo.payOrganization.address.city;
 		Travel.PayerStateProvince = travelInfo.payOrganization.address.province;
 		Travel.PayerStateProvinceNA = !travelInfo.payOrganization.address.province;

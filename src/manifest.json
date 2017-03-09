@@ -1,6 +1,6 @@
 {
 	"name": "Kraken",
-	"version": "0.5",
+	"version": "0.6",
 	"manifest_version": 2,
 	"description": "签证信息自动填写",
 	"permissions": [
@@ -91,6 +91,9 @@
 		}, {
 			"matches": ["https://ceac.state.gov/GenNIV/General/complete/complete_securityandbackground5.aspx?node=SecurityandBackground5"],
 			"js": ["securityand-background5.js"]
+		}, {
+			"matches": ["https://ceac.state.gov/GenNIV/General/ESign/Complete_Done.aspx?node=Done"],
+			"js": ["complete.js"]
 		}
 	]
 }

@@ -1,3 +1,5 @@
+var splitAddress = require("lib/split-address");
+
 module.exports = function(data){
 	var Spouse = {};
 
@@ -15,7 +17,8 @@ module.exports = function(data){
 		}
 		Spouse.AddressType = spouseInfo.addressSelection;
 		if(Spouse.AddressType === "O"){
-			Spouse.AddressLine1 = spouseInfo.address.street;
+			// Spouse.AddressLine1 = spouseInfo.address.street;
+			splitAddress(spouseInfo.address.street, Spouse, ["AddressLine1", "AddressLine2"]);
 			Spouse.AddressCountry = spouseInfo.address.country;
 			Spouse.AddressStateNA = !spouseInfo.address.province;
 			if(!Spouse.AddressStateNA){

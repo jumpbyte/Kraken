@@ -1,3 +1,5 @@
+var splitAddress = require("lib/split-address");
+
 function transWorkEducation1(wetInfo){
 	var WorkEducation1 = {};
 
@@ -8,7 +10,8 @@ function transWorkEducation1(wetInfo){
 	WorkEducation1.PresentOccupation = wetInfo.primaryOccupation;
 	WorkEducation1.ExplainOtherPresentOccupation = wetInfo.explain;
 	WorkEducation1.EmpSchName = schoolUnit.name;
-	WorkEducation1.EmpSchAddr1 = address.street;
+	// WorkEducation1.EmpSchAddr1 = address.street;
+	splitAddress(address.street, WorkEducation1, ["EmpSchAddr1", "EmpSchAddr2"]);
 	WorkEducation1.EmpSchCity = address.city;
 	WorkEducation1.EmpSchState = address.province;
 	WorkEducation1.EmpSchStateNA = !address.province;
@@ -32,9 +35,9 @@ function transWorkEducation2(wetInfo){
 		WorkEducation2.Employers = previousWork.employmentList.map(function(employment){
 			var address = employment.address;
 
-			return {
+			var item = {
 				EmployerName: employment.companyName,
-				EmployerStreetAddress1: address.street,
+				// EmployerStreetAddress1: address.street,
 				EmployerCity: address.city,
 				EmployerState: address.province,
 				EmployerStateNA: !address.province,
@@ -51,6 +54,10 @@ function transWorkEducation2(wetInfo){
 				EmployerDateTo: employment.to,
 				DescribeDuties: employment.duteDescription
 			};
+
+			splitAddress(address.street, item, ["EmployerStreetAddress1", "EmployerStreetAddress2"]);
+
+			return item;
 		});
 	}
 
@@ -59,9 +66,9 @@ function transWorkEducation2(wetInfo){
 		WorkEducation2.Schools = previousWork.institutionList.map(function(institution){
 			var address = institution.address;
 
-			return {
+			var item = {
 				SchoolName: institution.name,
-				SchoolAddr1: address.street,
+				// SchoolAddr1: address.street,
 				SchoolCity: address.city,
 				SchoolState: address.province,
 				SchoolStateNA: !address.province,
@@ -72,6 +79,10 @@ function transWorkEducation2(wetInfo){
 				SchoolDateFrom: institution.from,
 				SchoolDateTo: institution.to
 			};
+
+			splitAddress(address.street, item, ["SchoolAddr1", "SchoolAddr2"]);
+
+			return item;
 		});
 	}
 

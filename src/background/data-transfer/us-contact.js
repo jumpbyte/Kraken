@@ -1,3 +1,5 @@
+var splitAddress = require("lib/split-address");
+
 module.exports = function(data){
 	var USContact = {};
 
@@ -9,7 +11,8 @@ module.exports = function(data){
 	USContact.Organization = contactInfo.organizationName;
 	USContact.OrganizationNA = !contactInfo.organizationName;
 	USContact.Relationship = contactInfo.relationship;
-	USContact.Address1 = contactInfo.street;
+	// USContact.Address1 = contactInfo.street;
+	splitAddress(contactInfo.street, USContact, ["Address1", "Address2"]);
 	USContact.City = contactInfo.city;
 	USContact.State = contactInfo.state;
 	USContact.ZipCode = contactInfo.zipCode;

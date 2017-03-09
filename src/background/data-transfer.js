@@ -3,15 +3,11 @@ module.exports = function(data){
 		// home
 		"Home": {
 			"Location": "BEJ"
-		},
-		// secure-question
-		"SecureQuestion": {
-			"Questions": 1,
-			"Answer": "CHINA"
 		}
 	};
 
 	[
+		require("./data-transfer/secure-question"),
 		require("./data-transfer/personal"),
 		require("./data-transfer/address-phone"),
 		require("./data-transfer/passport"),

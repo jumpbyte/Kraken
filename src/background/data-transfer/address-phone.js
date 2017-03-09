@@ -1,9 +1,12 @@
+var splitAddress = require("lib/split-address");
+
 module.exports = function(data){
 	var AddressPhone = {};
 
 	var addrPhoneInfo = data.addrPhoneInfo;
 
-	AddressPhone.AddressLine1 = addrPhoneInfo.homeAddr.street;
+	// AddressPhone.AddressLine1 = addrPhoneInfo.homeAddr.street;
+	splitAddress(addrPhoneInfo.homeAddr.street, AddressPhone, ["AddressLine1", "AddressLine2"]);
 	AddressPhone.AddressCountry = addrPhoneInfo.homeAddr.country;
 	AddressPhone.AddressStateNA = !addrPhoneInfo.homeAddr.province;
 	if(!AddressPhone.AddressStateNA){
@@ -16,7 +19,8 @@ module.exports = function(data){
 	}
 	AddressPhone.MailingAddressSame = addrPhoneInfo.sameAddress;
 	if(!AddressPhone.MailingAddressSame){
-		AddressPhone.MailingAddressLine1 = addrPhoneInfo.mailingAddr.street;
+		// AddressPhone.MailingAddressLine1 = addrPhoneInfo.mailingAddr.street;
+		splitAddress(addrPhoneInfo.mailingAddr.street, AddressPhone, ["MailingAddressLine1", "MailingAddressLine2"]);
 		AddressPhone.MailingAddressCountry = addrPhoneInfo.mailingAddr.country;
 		AddressPhone.MailingAddressStateNA = !addrPhoneInfo.mailingAddr.province;
 		if(!AddressPhone.MailingAddressStateNA){
