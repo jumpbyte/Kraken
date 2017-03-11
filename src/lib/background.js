@@ -14,6 +14,12 @@ module.exports = {
 			callback(msg);
 		});
 	},
+	bindAppId: function(appId, callback){
+		chrome.extension.sendRequest({
+			name: "bind-appid",
+			appId: appId
+		}, callback);
+	},
 	submit: function(acceptNum, callback){
 		chrome.extension.sendRequest({
 			name: "complete",

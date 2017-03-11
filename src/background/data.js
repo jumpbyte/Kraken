@@ -23,12 +23,18 @@ module.exports = {
 			console.error("没有数据");
 		}
 	},
+	bindAppId: function(appId){
+		if(data){
+			data.appId = appId;
+		}
+	},
 	submit: function(acceptNum, callback){
 		if(data){
 			$.ajax({
 				url: options.submitUrl || config["submit-url"],
 				data: {
-					acceptNum: acceptNum,
+					// acceptNum: acceptNum,
+					acceptNum: data.appId,
 					formId: data.formId,
 					status: 1
 				},

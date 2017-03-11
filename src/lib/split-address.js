@@ -14,6 +14,8 @@ function splitItem(items){
 }
 
 module.exports = function(street, obj, properties){
+	street = street || "";
+	
 	if(street.length <= 40){
 		obj[properties[0]] = street;
 	}else{

@@ -3,9 +3,9 @@ var splitAddress = require("lib/split-address");
 function transWorkEducation1(wetInfo){
 	var WorkEducation1 = {};
 
-	var presentWork = wetInfo.presentWork;
-	var schoolUnit = presentWork.schoolUnit;
-	var address = schoolUnit.address;
+	var presentWork = wetInfo.presentWork || {};
+	var schoolUnit = presentWork.schoolUnit || {};
+	var address = schoolUnit.address || {};
 
 	WorkEducation1.PresentOccupation = wetInfo.primaryOccupation;
 	WorkEducation1.ExplainOtherPresentOccupation = wetInfo.explain;
@@ -29,11 +29,11 @@ function transWorkEducation1(wetInfo){
 function transWorkEducation2(wetInfo){
 	var WorkEducation2 = {};
 
-	var previousWork = wetInfo.previousWork;
+	var previousWork = wetInfo.previousWork || {};
 	WorkEducation2.PreviouslyEmployed = previousWork.employed;
 	if(WorkEducation2.PreviouslyEmployed){
 		WorkEducation2.Employers = previousWork.employmentList.map(function(employment){
-			var address = employment.address;
+			var address = employment.address || {};
 
 			var item = {
 				EmployerName: employment.companyName,

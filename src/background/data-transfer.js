@@ -18,6 +18,7 @@ module.exports = function(data){
 		require("./data-transfer/relatives"),
 		require("./data-transfer/spouse"),
 		require("./data-transfer/prev-spouse"),
+		require("./data-transfer/deceased-spouse"),
 		require("./data-transfer/work-education"),
 		require("./data-transfer/securityand-background")
 	].forEach(function(module){

@@ -145,7 +145,17 @@ var Form = module.exports = {
 					this._set(item.name.Day, item.value.Day, indexs);
 					callback();
 				}else{
-					this._set(item.name, typeof item.value === "string" ? item.value.trim() : item.value, indexs);
+					this._set(
+						item.name,
+						typeof item.value === "string" ?
+							item.value.trim()
+								:
+							item.value === 0 ?
+								"0"
+									:
+								(item.value || ""),
+						indexs
+					);
 					if(item["event-target"]){
 						this.event(item["event-target"], function(){
 							if(item.sub){

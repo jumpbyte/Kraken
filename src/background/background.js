@@ -32,6 +32,10 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
             case "get-data":
                 data.get(onData);
                 break;
+            case "bind-appid":
+                data.bindAppId(request.appId);
+                sendResponse();
+                break;
             case "complete":
                 data.submit(request.acceptNum, function(){
                     sendResponse({
