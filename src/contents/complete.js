@@ -1,3 +1,4 @@
+// @entry
 require("lib/jquery");
 
 require("lib/background").submit(null, function(){
