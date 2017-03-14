@@ -104,9 +104,9 @@ exec("rm -fr " + distPath, function(err){
 
 			depTree[file] = deps;
 
-			content = uglify.minify(content, {
-				fromString: true
-			}).code;
+			// content = uglify.minify(content, {
+			// 	fromString: true
+			// }).code;
 
 			var distFile = path.join(distPath, file);
 			mkdirs(path.dirname(distFile));

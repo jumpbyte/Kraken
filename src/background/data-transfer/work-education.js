@@ -8,7 +8,12 @@ function transWorkEducation1(wetInfo){
 	var address = schoolUnit.address || {};
 
 	WorkEducation1.PresentOccupation = wetInfo.primaryOccupation;
-	WorkEducation1.ExplainOtherPresentOccupation = wetInfo.explain;
+	if(WorkEducation1.PresentOccupation==="N"){
+		WorkEducation1.ExplainOtherPresentOccupation = wetInfo.explain;
+	}else if(WorkEducation1.PresentOccupation==="O"){
+		WorkEducation1.ExplainOtherPresentOccupation = wetInfo.other;
+	}
+	
 	WorkEducation1.EmpSchName = schoolUnit.name;
 	// WorkEducation1.EmpSchAddr1 = address.street;
 	splitAddress(address.street, WorkEducation1, ["EmpSchAddr1", "EmpSchAddr2"]);
@@ -30,7 +35,7 @@ function transWorkEducation2(wetInfo){
 	var WorkEducation2 = {};
 
 	var previousWork = wetInfo.previousWork || {};
-	WorkEducation2.PreviouslyEmployed = previousWork.employed;
+	WorkEducation2.PreviouslyEmployed = wetInfo.haveWorkBefore;
 	if(WorkEducation2.PreviouslyEmployed){
 		WorkEducation2.Employers = previousWork.employmentList.map(function(employment){
 			var address = employment.address || {};
@@ -61,7 +66,7 @@ function transWorkEducation2(wetInfo){
 		});
 	}
 
-	WorkEducation2.OtherEduc = previousWork.attended;
+	WorkEducation2.OtherEduc = previousWork.haveAttendSchool;
 	if(WorkEducation2.OtherEduc){
 		WorkEducation2.Schools = previousWork.institutionList.map(function(institution){
 			var address = institution.address;
