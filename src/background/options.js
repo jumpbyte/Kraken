@@ -5,6 +5,7 @@ var Options = {};
 var AUTO_NEXT_STORAGE_KEY = "auto-next";
 var REQUEST_URL_STORAGE_KEY = "request-url";
 var SUBMIT_URL_STORAGE_KEY = "submit-url";
+var MD5_KEY_STORAGE_KEY = "md5-key";
 
 Object.defineProperty(Options, "autoNext", {
     get: function(){
@@ -34,6 +35,15 @@ Object.defineProperty(Options, "submitUrl", {
     },
     set: function(value){
         storage.set(SUBMIT_URL_STORAGE_KEY, value);
+    }
+});
+
+Object.defineProperty(Options, "md5Key", {
+    get: function(){
+        return storage.get(MD5_KEY_STORAGE_KEY) || "";
+    },
+    set: function(value){
+        storage.set(MD5_KEY_STORAGE_KEY, value);
     }
 });
 

@@ -155,8 +155,8 @@ exec("rm -fr " + distPath, function(err){
 		});
 
 		// 编译manifest
-		// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
-		fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
+		fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest, null, "	"));
+		// fs.writeFileSync(path.join(distPath, "manifest.json"), JSON.stringify(manifest));
 
 		var optionsHtml = fs.readFileSync(path.join(srcPath, "options.html")).toString("utf8");
 		optionsHtml = optionsHtml.replace(/<script\s+src="([^"]+)"><\/script>/g, function(all, file){

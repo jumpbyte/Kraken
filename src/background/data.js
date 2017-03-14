@@ -1,4 +1,5 @@
 require("lib/jquery");
+require("lib/md5");
 var dataTransfer = require("./data-transfer");
 var options = require("./options");
 var config = require("config");
@@ -9,7 +10,10 @@ module.exports = {
 		$.ajax({
 			url: options.requestUrl || config["request-url"],
 			dataType: "json",
-			data: params
+			data: {
+				formId: params.formId,
+				key: md5(params.formId + options.md5Key)
+			}
 		}).done(function(result){
 			result.data = dataTransfer(result.data);
 			data = result;
@@ -33,10 +37,10 @@ module.exports = {
 			$.ajax({
 				url: options.submitUrl || config["submit-url"],
 				data: {
-					// acceptNum: acceptNum,
 					acceptNum: data.appId,
 					formId: data.formId,
-					status: 1
+					status: 1,
+					key: md5(data.appId + data.formId + options.md5Key)
 				},
 				dataType: "json"
 			}).done(function(result){

@@ -13,7 +13,6 @@ function transWorkEducation1(wetInfo){
 	}else if(WorkEducation1.PresentOccupation==="O"){
 		WorkEducation1.ExplainOtherPresentOccupation = wetInfo.other;
 	}
-	
 	WorkEducation1.EmpSchName = schoolUnit.name;
 	// WorkEducation1.EmpSchAddr1 = address.street;
 	splitAddress(address.street, WorkEducation1, ["EmpSchAddr1", "EmpSchAddr2"]);

@@ -22,3 +22,10 @@ $("#submit-url")
 	.on("keyup", function(){
 		options.submitUrl = $(this).val();
 	});
+
+$("#md5-key")
+	.val(options.md5Key)
+	.attr("placeholder", config["md5-key"])
+	.on("keyup", function(){
+		options.md5Key = $(this).val();
+	});
