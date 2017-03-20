@@ -1,7 +1,7 @@
 var Type = require("./type");
 
 function doubleNum(value){
-	return value.length === 1 ? "0" + value : value;
+	return  value?(value.length === 1 ? "0" + value : value):"";
 }
 
 var Entity = module.exports = function(entity, hash, parentsKey){
@@ -73,8 +73,8 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 							date = date.split("-");
 							return {
 								"Year": date[0],
-								"Month": +date[1] + "",
-								"Day": +date[2] + ""
+								"Month": date[1] && +date[1]+"",
+								"Day": date[2] && +date[2]+""
 							};
 						})(value || item["default"])
 					};
@@ -85,7 +85,7 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 							date = date.split("-");
 							return {
 								"Year": date[0],
-								"Month": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"][+date[1] - 1],
+								"Month": ["JAN", "FEB", "MAR", "APR", "MAY", "JUN", "JUL", "AUG", "SEP", "OCT", "NOV", "DEC"][+date[1] - 1]||"",
 								"Day": doubleNum(date[2])
 							};
 						})(value || item["default"])
@@ -93,7 +93,7 @@ var Entity = module.exports = function(entity, hash, parentsKey){
 					break;
 				case Type.String:
 					data[key] = {
-						value: (typeof value === "undefined" ? (item["default"] || "") : value) + "",
+						value: (typeof value === "undefined" ? (item["default"] || "") : value),
 						"event-target": item["event-target"],
 						sub: item["event-target"] && item.sub ? Entity(item.sub, hash, parentsKey)(_data) : null
 					};

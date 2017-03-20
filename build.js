@@ -88,15 +88,16 @@ exec("rm -fr " + distPath, function(err){
 
 					if(/^\.{1,2}\//.test(name)){
 						_name = path.join(path.dirname(file), name);
+						_name=_name.replace(/\\/g,"/");
+						console.log(_name);
 					}
-
 					deps.push(_name + ".js");
 
 					return all.replace(name, _name);
 				});
 
 				content = tpl(packTpl, {
-					path: file.replace(/\.js$/, ""),
+					path: file.replace(/\.js$/, "").replace(/\//g,"/"),
 					content: content,
 					run: /\/\/\s*@entry\s*\n/.test(content)
 				});
@@ -122,13 +123,13 @@ exec("rm -fr " + distPath, function(err){
 			run: false
 		}));
 
-		var loaderFile = path.join("lib", "loader.js");
+		var loaderFile = path.join("lib", "loader.js").replace(/\\/g,"/");
 
 		// 编译背景js
 		var files = [];
 		manifest.background.scripts.forEach(function(file){
 			file = path.join("background", file);
-
+			file=file.replace(/\\/g,"/");
 			[file].concat(getDeps(file)).forEach(function(file){
 				if(files.indexOf(file) === -1){
 					files.push(file);
@@ -143,7 +144,7 @@ exec("rm -fr " + distPath, function(err){
 			var files = [];
 			config.js.forEach(function(file){
 				file = path.join("contents", file);
-
+				file = file.replace(/\\/g,"/");
 				[file].concat(getDeps(file)).forEach(function(file){
 					if(files.indexOf(file) === -1){
 						files.push(file);
@@ -161,7 +162,7 @@ exec("rm -fr " + distPath, function(err){
 		var optionsHtml = fs.readFileSync(path.join(srcPath, "options.html")).toString("utf8");
 		optionsHtml = optionsHtml.replace(/<script\s+src="([^"]+)"><\/script>/g, function(all, file){
 			return [loaderFile].concat([file].concat(getDeps(file)).reverse()).map(function(file){
-				return '<script type="text/javascript" src="' + file + '"></script>';
+				return '<script type="text/javascript" src="' + (file.replace(/\//g,"/"))+ '"></script>';
 			}).join("\n");
 		});
 		fs.writeFileSync(path.join(distPath, "options.html"), optionsHtml);

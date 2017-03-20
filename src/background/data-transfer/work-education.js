@@ -52,8 +52,10 @@ function transWorkEducation2(wetInfo){
 				JobTitle: employment.jobTitle,
 				SupervisorSurname: employment.supervisor.surnName,
 				SupervisorSurnameNA: !employment.supervisor.surnName,
-				SupervisorGivenName: employment.supervisor.givenName,
+				SupervisorSurnameNAVal:!employment.supervisor.surnName?"Y":"N",
+				SupervisorGivenName: employment.supervisor.givenName||'',
 				SupervisorGivenNameNA: !employment.supervisor.givenName,
+				SupervisorGivenNameNAVal:!employment.supervisor.givenName?"Y":"N",
 				EmployerDateFrom: employment.from,
 				EmployerDateTo: employment.to,
 				DescribeDuties: employment.duteDescription

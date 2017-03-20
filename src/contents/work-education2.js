@@ -40,10 +40,12 @@ Page("WorkEducation2", {
 							"SupervisorSurnameNA": {
 								"type": Type.Bool
 							},
+							"SupervisorSurnameNAVal":{},
 							"SupervisorGivenName": {},
 							"SupervisorGivenNameNA": {
 								"type": Type.Bool
 							},
+							"SupervisorGivenNameNAVal":{},
 							"EmployerDateFrom": {
 								"type": Type.DateS
 							},
@@ -109,8 +111,10 @@ Page("WorkEducation2", {
 		"JobTitle": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbJobTitle",
 		"SupervisorSurname": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbSupervisorSurname",
 		"SupervisorSurnameNA": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$cbxSupervisorSurname_NA",
+		"SupervisorSurnameNAVal":"ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbSupervisorSurname_NA",
 		"SupervisorGivenName": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbSupervisorGivenName",
 		"SupervisorGivenNameNA": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$cbxSupervisorGivenName_NA",
+		"SupervisorGivenNameNAVal":"ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbSupervisorGivenName_NA",
 		"EmployerDateFrom": {
 			"Year": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$tbxEmpDateFromYear",
 			"Month": "ctl00$SiteContentPlaceHolder$FormView1$dtlPrevEmpl$ctl0{0}$ddlEmpDateFromMonth",
