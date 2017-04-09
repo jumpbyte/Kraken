@@ -20,7 +20,8 @@ module.exports = function(data){
 		require("./data-transfer/prev-spouse"),
 		require("./data-transfer/deceased-spouse"),
 		require("./data-transfer/work-education"),
-		require("./data-transfer/securityand-background")
+		require("./data-transfer/securityand-background"),
+		require("./data-transfer/sign-certify")
 	].forEach(function(module){
 		Object.assign(ViewModule, module(data));
 	});

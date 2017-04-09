@@ -17,7 +17,7 @@ chrome.extension.onRequest.addListener(function(request, sender, sendResponse) {
         });
     }
 
-    if(Switch.isOpen){
+    if(Switch.isOpen || request.name==="complete"){
         switch(request.name){
             case "request-data":
                 if(request.params.formId && request.params.formId !== formIdCache[sender.tab.id]){
