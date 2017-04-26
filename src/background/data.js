@@ -12,7 +12,8 @@ module.exports = {
 			dataType: "json",
 			data: {
 				formId: params.formId,
-				key: md5(params.formId + options.md5Key)
+				key: md5(params.formId + options.md5Key),
+				t:new Date().getTime()
 			}
 		}).done(function(result){
 			result.data = dataTransfer(result.data);

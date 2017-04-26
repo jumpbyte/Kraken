@@ -1,8 +1,11 @@
 var splitAddress = require("lib/split-address");
 
 function transWorkEducation1(wetInfo){
+	
 	var WorkEducation1 = {};
-
+	if(!wetInfo) {
+		return WorkEducation1;
+	}
 	var presentWork = wetInfo.presentWork || {};
 	var schoolUnit = presentWork.schoolUnit || {};
 	var address = schoolUnit.address || {};
@@ -32,7 +35,9 @@ function transWorkEducation1(wetInfo){
 
 function transWorkEducation2(wetInfo){
 	var WorkEducation2 = {};
-
+	if(!wetInfo) {
+		return WorkEducation2;
+	}
 	var previousWork = wetInfo.previousWork || {};
 	WorkEducation2.PreviouslyEmployed = wetInfo.haveWorkBefore;
 	if(WorkEducation2.PreviouslyEmployed){
@@ -67,7 +72,7 @@ function transWorkEducation2(wetInfo){
 		});
 	}
 
-	WorkEducation2.OtherEduc = previousWork.haveAttendSchool;
+	WorkEducation2.OtherEduc = wetInfo.haveAttendSchool;
 	if(WorkEducation2.OtherEduc){
 		WorkEducation2.Schools = previousWork.institutionList.map(function(institution){
 			var address = institution.address;
@@ -97,12 +102,14 @@ function transWorkEducation2(wetInfo){
 
 function transWorkEducation3(wetInfo){
 	var WorkEducation3 = {};
-
+	if(!wetInfo) {
+		return WorkEducation3;
+	}
 	var addition = wetInfo.addition;
 
 	WorkEducation3.IsBelongClan = addition.belongClanOrTribe;
 	WorkEducation3.ClanName = addition.clanOrTribeName;
-	WorkEducation3.LanguageNames = addition.languages.map(function(language){
+	WorkEducation3.LanguageNames = addition.languages && addition.languages.map(function(language){
 		return {
 			LanguageName: language
 		};
