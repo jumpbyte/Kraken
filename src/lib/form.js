@@ -5,7 +5,7 @@ var asyncList = require("./async-list");
 var queue = require("./queue");
 
 var forms = document.forms["aspnetForm"];
-
+window.theForm=forms;
 var Form = module.exports = {
 	init: function(controls){
 		Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', forms);
@@ -52,8 +52,12 @@ var Form = module.exports = {
 	},
 	_set: function(name, value, indexs, optional){
 		indexs = indexs || [];
-		name = name.replace(/\{(\d+)\}/g, function(all, key){
-			return indexs[key];
+		name = name.replace(/0\{(\d+)\}/g, function(all, key){
+			if(indexs[key]<10){
+				return "0"+indexs[key];
+			}else{
+				return indexs[key];
+			}
 		});
 
 		var form = forms[name];
