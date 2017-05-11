@@ -1296,7 +1296,7 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
             handler(this, this._getPageLoadingEventArgs(data));
         }
         if(callback){
-            setTimeout(callback,1);
+            setTimeout(callback,100);
         }
         Sys._ScriptLoader.readLoadedScripts();
         Sys.Application.beginCreateComponents();
@@ -1482,9 +1482,6 @@ Sys.WebForms.PageRequestManager = function Sys$WebForms$PageRequestManager() {
                     return null;
             } 
         } 
-        if(callback){
-			setTimeout(callback, 1);
-		}
         return {
             version4: versionNode ? (parseFloat(versionNode.content) >= 4) : false,
             executor: executor,

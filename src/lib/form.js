@@ -6,6 +6,13 @@ var queue = require("./queue");
 
 var forms = document.forms["aspnetForm"];
 window.theForm=forms;
+window.__doPostBack=function(eventTarget, eventArgument){
+    if (!theForm.onsubmit || (theForm.onsubmit() != false)) {
+        theForm.__EVENTTARGET.value = eventTarget;
+        theForm.__EVENTARGUMENT.value = eventArgument;
+        theForm.submit();
+    }
+}
 var Form = module.exports = {
 	init: function(controls){
 		Sys.WebForms.PageRequestManager._initialize('ctl00$ScriptManager1', forms);

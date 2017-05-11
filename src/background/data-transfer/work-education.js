@@ -157,6 +157,12 @@ function transWorkEducation3(wetInfo){
 }
 
 module.exports = function(data){
+	var previousTravelInfo = data.previousTravelInfo;
+	if(data.wetInfo){
+		if(previousTravelInfo.traveledInFiveYear){
+			data.wetInfo.addition.visitedCountry=previousTravelInfo.visitedCountry;
+		}
+	}
 	return data.wetInfo ? {
 		WorkEducation1: transWorkEducation1(data.wetInfo),
 		WorkEducation2: transWorkEducation2(data.wetInfo),
